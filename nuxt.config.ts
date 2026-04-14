@@ -8,7 +8,6 @@ import { joinURL, parseURL } from 'ufo'
 import { NUXT_BEHAVIOR_CONFIG } from './config/constants'
 import { app } from './config/head'
 import { siteDescription, siteTitle } from './config/identity'
-import { robots } from './config/robots'
 
 const SUPPORTED_MODES = ['dev', 'prod', 'preview'] as const
 
@@ -44,13 +43,12 @@ export default defineNuxtConfig({
 	modules: [
 		'@nuxt/eslint',
 		'@nuxt/ui',
+		'@nuxtjs/seo',
 		'@nuxt/image',
 		'@nuxtjs/plausible',
 		'@sentry/nuxt/module',
 		'@vueuse/nuxt',
 		'@nuxthub/core',
-		'nuxt-site-config',
-		'@nuxtjs/robots',
 		'@nuxt/content',
 		'nuxt-llms',
 		'nuxt-studio',
@@ -329,8 +327,6 @@ export default defineNuxtConfig({
 		indexable: isProd,
 		trailingSlash: false
 	},
-
-	robots,
 
 	// TODO fix llm config
 	llms: {

@@ -48,3 +48,13 @@ export const NUXT_BEHAVIOR_CONFIG = {
 	/** Hostnames excluded from Plausible tracking. */
 	plausibleIgnoredHostnames: ['localhost']
 } as const
+
+/**
+ * Header names used by request security middleware/helpers.
+ */
+export const SECURITY_HEADERS = {
+	/** Turnstile token header sent by clients to protected routes. */
+	turnstileToken: 'x-turnstile-token',
+	/** Admin bypass token header used for server-to-server testing. */
+	adminToken: 'x-admin-token'
+} as const

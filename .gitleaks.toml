@@ -24,3 +24,10 @@ paths = [
   '''.idea/*''',
   '''.nuxt/.*'''
 ]
+
+# Allow JWT example from VueUse skill
+[[allowlists]]
+description = "Ignore useJwt example"
+paths = [
+  '''.*\.agents/skills/vueuse-functions/references/useJwt\.md$'''
+]

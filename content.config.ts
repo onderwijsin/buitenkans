@@ -1,4 +1,8 @@
 import { defineCollection, defineContentConfig } from '@nuxt/content'
+import { defineRobotsSchema } from '@nuxtjs/robots/content'
+import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
+import { defineOgImageSchema } from 'nuxt-og-image/content'
+import { defineSchemaOrgSchema } from 'nuxt-schema-org/content'
 import { z } from 'zod'
 
 export default defineContentConfig({
@@ -14,7 +18,11 @@ export default defineContentConfig({
 			schema: z.object({
 				title: z.string(),
 				description: z.string(),
-				date: z.iso.date()
+				date: z.iso.date(),
+				robots: defineRobotsSchema(),
+				sitemap: defineSitemapSchema(),
+				ogImage: defineOgImageSchema(),
+				schemaOrg: defineSchemaOrgSchema()
 			})
 		}),
 		resources: defineCollection({
@@ -27,7 +35,11 @@ export default defineContentConfig({
 				title: z.string(),
 				description: z.string(),
 				category: z.enum(['tool', 'source', 'media']),
-				date: z.iso.date()
+				date: z.iso.date(),
+				robots: defineRobotsSchema(),
+				sitemap: defineSitemapSchema(),
+				ogImage: defineOgImageSchema(),
+				schemaOrg: defineSchemaOrgSchema()
 			})
 		}),
 		faqs: defineCollection({

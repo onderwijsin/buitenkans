@@ -38,6 +38,7 @@
 		"@nuxtjs/eslint-module": "catalog:",
 		"@nuxtjs/plausible": "catalog:",
 		"@nuxtjs/robots": "catalog:",
+		"@nuxtjs/seo": "catalog:",
 		"@semantic-release/changelog": "catalog:",
 		"@semantic-release/commit-analyzer": "catalog:",
 		"@semantic-release/git": "catalog:",

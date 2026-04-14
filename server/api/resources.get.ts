@@ -7,5 +7,5 @@ import { queryCollection } from '@nuxt/content/server'
  * @returns Extra resources from Nuxt Content.
  */
 export default defineEventHandler((event) => {
-	return queryCollection(event, 'extras').where('extension', '=', 'md').all()
+	return queryCollection(event, 'resources').where('extension', '=', 'md').all()
 })
