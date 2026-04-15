@@ -170,6 +170,7 @@ function createSafeFetch(): typeof fetch {
 }
 
 export default defineEventHandler(async (event) => {
+	console.error('CUSTOM ASSISTANT ROUTE HIT')
 	const { messages } = await readBody(event)
 	const config = useRuntimeConfig()
 	const siteConfig = getSiteConfig(event)

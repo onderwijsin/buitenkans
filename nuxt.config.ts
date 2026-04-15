@@ -357,5 +357,15 @@ export default defineNuxtConfig({
 				contentCollection: 'faqs'
 			}
 		]
+	},
+
+	content: {
+		// Avoid stale/empty `.data/content/contents.sqlite` between `prepare`/`typecheck` and `dev`.
+		// Nuxt Content uses `_localDatabase` for dev/prerender, while production still uses the
+		// runtime database adapter selected by the deployment preset (D1 on Cloudflare here).
+		_localDatabase: {
+			type: 'sqlite',
+			filename: '.data/:memory:'
+		}
 	}
 })
