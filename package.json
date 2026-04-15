@@ -73,6 +73,7 @@
 		"zod": "catalog:"
 	},
 	"dependencies": {
+		"agents": "catalog:",
 		"class-variance-authority": "catalog:",
 		"clsx": "catalog:",
 		"lucide-vue-next": "catalog:",

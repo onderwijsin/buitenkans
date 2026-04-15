@@ -11,6 +11,11 @@
 			"sourceType": "well-known",
 			"computedHash": "3c6d7d6f6084ff5ebbd59fe8b348f99bced0d303da45cd61069a0f6dac8199f6"
 		},
+		"manage-mcp": {
+			"source": "mcp-toolkit.nuxt.dev",
+			"sourceType": "well-known",
+			"computedHash": "6c47912776503f26e65d08b92eef510bda85fc1ef1783d148ed1dfd310c8f148"
+		},
 		"nuxt": {
 			"source": "antfu/skills",
 			"sourceType": "github",

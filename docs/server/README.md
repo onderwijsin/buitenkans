@@ -28,6 +28,11 @@ Docus includes an MCP server that powers the integrated assistant.
 In addition to Docus defaults (`list-pages`, `get-page`), this project provides custom tools in
 `server/mcp/tools/*` for domain-specific retrieval and recommendations.
 
+Cloudflare deployment note:
+
+- `@nuxtjs/mcp-toolkit` Cloudflare provider imports `agents/mcp`.
+- `agents` must be present in project `dependencies` or Nitro build will fail to resolve it.
+
 ### `GET /api/_sentry/trigger-error`
 
 Intentional throw route used to verify Sentry capture.

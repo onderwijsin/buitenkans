@@ -296,7 +296,9 @@ export default defineNuxtConfig({
 	},
 
 	fonts: {
-		families: [{ name: 'Poppins', provider: 'google', weights: [200, 400, 500, 700] }]
+		families: [
+			{ name: 'Poppins', provider: 'google', weights: [200, 400, 500, 700], global: true }
+		]
 	},
 
 	plausible: {
@@ -319,6 +321,12 @@ export default defineNuxtConfig({
 		language: NUXT_BEHAVIOR_CONFIG.language,
 		indexable: isProd,
 		trailingSlash: false
+	},
+
+	ogImage: {
+		buildCache: {
+			base: '.cache/og-image'
+		}
 	},
 
 	llms: {

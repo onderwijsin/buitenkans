@@ -44,6 +44,7 @@ Automation:
 - `assistant.model = 'mistral/mistral-medium'`
 - gateway key from `AI_GATEWAY_API_KEY`
 - assistant consumes MCP tools from `/mcp` (Docus + `@nuxtjs/mcp-toolkit`)
+- Cloudflare MCP transport requires runtime package `agents` (for `agents/mcp` import)
 - custom project MCP tools:
   - `search-knowledge`
   - `list-insights`

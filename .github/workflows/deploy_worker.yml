@@ -99,6 +99,12 @@ jobs:
 
           echo "Generated .env with $(wc -l < .env) entries"
 
+      - name: Cache OG Images
+        uses: actions/cache@v4
+        with:
+          path: ${{ inputs.working-directory }}/.cache/og-image
+          key: og-images-${{ github.ref_name }}
+
       - name: Build Nuxt Application
         run: pnpm build
         working-directory: ${{ inputs.working-directory }}

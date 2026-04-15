@@ -10,6 +10,19 @@ This project currently uses AI through the **built-in Docus/Nuxt UI assistant**.
 - Gateway key in environment: `AI_GATEWAY_API_KEY` (see [`../../.example.env`](../../.example.env))
 - MCP-backed assistant tool surface available at `/mcp` (provided by Docus + `@nuxtjs/mcp-toolkit`)
 
+## Cloudflare Build Prerequisite
+
+Because this project deploys Nitro with `preset: 'cloudflare_module'` and uses
+`@nuxtjs/mcp-toolkit`, the runtime dependency `agents` must be installed.
+
+Reason:
+
+- MCP toolkit's Cloudflare transport imports `agents/mcp`.
+- If `agents` is missing, production build fails with:
+  - `Cannot resolve "agents/mcp" ... and externals are not allowed`
+
+Keep `agents` in `dependencies` (not only `devDependencies`).
+
 ## Important Scope Clarification
 
 This repository does **not** currently implement custom AI backend routes for report generation.
