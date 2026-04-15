@@ -24,6 +24,7 @@ const props = withDefaults(defineProps<LandingRevealProps>(), {
 })
 
 const targetRef = ref<HTMLElement | null>(null)
+const reducedMotion = usePreferredReducedMotion()
 
 const isVisible = useElementVisibility(targetRef, {
 	threshold: 0.2
@@ -54,16 +55,22 @@ const hiddenTransform = computed(() => {
 	}
 })
 
-const revealStyle = computed(() => ({
-	opacity: isVisible.value ? '1' : '0',
-	transform: isVisible.value ? 'translate3d(0, 0, 0)' : hiddenTransform.value,
-	filter: isVisible.value ? 'blur(0px)' : 'blur(3px)',
-	transitionProperty: 'transform, opacity, filter',
-	transitionDuration: `${props.durationMs}ms`,
-	transitionDelay: `${props.delayMs}ms`,
-	transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
-	willChange: 'transform, opacity, filter'
-}))
+const revealStyle = computed(() => {
+	if (reducedMotion.value === 'reduce') {
+		return { opacity: '1' }
+	}
+
+	return {
+		opacity: isVisible.value ? '1' : '0',
+		transform: isVisible.value ? 'translate3d(0, 0, 0)' : hiddenTransform.value,
+		filter: isVisible.value ? 'blur(0px)' : 'blur(3px)',
+		transitionProperty: 'transform, opacity, filter',
+		transitionDuration: `${props.durationMs}ms`,
+		transitionDelay: `${props.delayMs}ms`,
+		transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
+		willChange: 'transform, opacity, filter'
+	}
+})
 </script>
 
 <template>

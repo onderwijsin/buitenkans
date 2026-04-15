@@ -30,6 +30,17 @@ Shared logic:
 - `server/utils/raw-markdown.ts`
 - extension/removal playbook: `.agents/patterns/raw-markdown-overrides.md`
 
+## Custom MCP Tools
+
+Custom assistant tools in `server/mcp/tools/*`:
+
+- `search-knowledge` — unified search across `docs`, `faqs`, and `people`
+- `list-insights` — structured list of all insight pages
+- `recommend-insights` — objective-driven recommendations for which insights to read first
+- `list-faqs` — FAQ listing with optional query filtering
+
+Consumed by the Docus assistant runtime through MCP.
+
 ## Server Routes
 
 Active files:
@@ -38,6 +49,10 @@ Active files:
 - `server/routes/assets/[...pathname].get.ts`
 - `server/api/content.get.ts`
 - `server/api/resources.get.ts`
+- `server/mcp/tools/search-knowledge.ts`
+- `server/mcp/tools/list-insights.ts`
+- `server/mcp/tools/recommend-insights.ts`
+- `server/mcp/tools/list-faqs.ts`
 - `server/routes/raw/docs/inzichten/overzicht.md.get.ts`
 - `server/routes/raw/docs/duik-dieper/veelgestelde-vragen.md.get.ts`
 - `server/routes/raw/docs/duik-dieper/klankbordgroep.md.get.ts`

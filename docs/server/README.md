@@ -26,7 +26,17 @@ This document describes active server routes and runtime behavior.
 Docus includes an MCP server that powers the integrated assistant.
 
 In addition to Docus defaults (`list-pages`, `get-page`), this project provides custom tools in
-`server/mcp/tools/*` for domain-specific retrieval and recommendations.
+`server/mcp/tools/*` for domain-specific retrieval and recommendations:
+
+| Tool                 | Description                                                        |
+| -------------------- | ------------------------------------------------------------------ |
+| `search-knowledge`   | Unified search across `docs`, `faqs`, and `people` collections.    |
+| `list-insights`      | Structured list of all insight pages with optional summaries.      |
+| `recommend-insights` | Objective-driven recommendations for which insights to read first. |
+| `list-faqs`          | FAQ listing with optional query filtering and ranked results.      |
+
+See [`../ai-integration/README.md`](../ai-integration/README.md) for assistant config and MCP
+transport details.
 
 Cloudflare deployment note:
 
