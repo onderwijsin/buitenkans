@@ -60,37 +60,39 @@ index f72dff99fa71300e2fa10726523197fcc57158a5..1098e9a464ab4b4551ce04c4cf1375bd
    }
  }
 diff --git a/modules/assistant/runtime/server/api/search.ts b/modules/assistant/runtime/server/api/search.ts
-index 5b61d864f6414b79178cd25f9ffc9e5110dec62d..f4c54fb02e53f61f82fca4910e5d847701882a3c 100644
+index 5b61d864f6414b79178cd25f9ffc9e5110dec62d..6ea71c59070c7604f6a807f6f31a37121d5d099d 100644
 --- a/modules/assistant/runtime/server/api/search.ts
 +++ b/modules/assistant/runtime/server/api/search.ts
-@@ -4,6 +4,21 @@ import { createMCPClient } from '@ai-sdk/mcp'
+@@ -4,6 +4,23 @@ import { createMCPClient } from '@ai-sdk/mcp'
  
  const MAX_STEPS = 10
  
-+function createSafeFetch(): typeof fetch {
-+  const boundFetch = fetch.bind(globalThis)
-+
++function createSafeFetch(eventFetch: typeof fetch, origin: string): typeof fetch {
 +  return (input, init) => {
++    const url = typeof input === 'string' ? input : input instanceof URL ? input.toString() : input.url
 +    const headers = new Headers(init?.headers)
-+
 +    headers.set('accept', 'application/json, text/event-stream')
 +
-+    return boundFetch(input, {
-+      ...init,
-+      headers,
-+    })
++    // Convert same-origin URLs to relative paths for Nitro internal routing.
++    // This avoids self-referencing HTTP on Cloudflare Workers (522).
++    let resolvedInput: string | Request | URL = input
++    if (url.startsWith(origin)) {
++      resolvedInput = url.slice(origin.length) || '/'
++    }
++
++    return eventFetch(resolvedInput, { ...init, headers })
 +  }
 +}
 +
  // eslint-disable-next-line @typescript-eslint/no-explicit-any
  function stopWhenResponseComplete({ steps }: { steps: any[] }): boolean {
    const lastStep = steps.at(-1)
-@@ -73,7 +88,7 @@ export default defineEventHandler(async (event) => {
+@@ -73,7 +90,7 @@ export default defineEventHandler(async (event) => {
        : `${getRequestURL(event).origin}${baseURL}${mcpServer}`
  
    const httpClient = await createMCPClient({
 -    transport: { type: 'http', url: mcpUrl },
-+    transport: { type: 'http', url: mcpUrl, fetch: createSafeFetch() },
++    transport: { type: 'http', url: mcpUrl, fetch: createSafeFetch(event.fetch, getRequestURL(event).origin) },
    })
    const mcpTools = await httpClient.tools()
  
