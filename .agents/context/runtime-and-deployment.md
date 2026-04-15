@@ -7,10 +7,10 @@
 - production route rule prerenders `/**`
 - `/assets/**` served through blob route
 - `/stats` redirects to Plausible dashboard
-- temporary Docus Dutch locale patch active:
+- temporary Docus patch active (locale, OG font, MCP transport, type compat, sitemap):
   - `patches/docus@5.9.0.patch`
   - `pnpm-workspace.yaml` patched dependency entry for `docus@5.9.0`
-  - removal trigger tracked in `.agents/context/i18n-patches.md`
+  - full inventory tracked in `.agents/context/i18n-patches.md`
 
 ## Typecheck Compatibility
 
@@ -63,6 +63,10 @@ Automation:
 - gateway key from `AI_GATEWAY_API_KEY`
 - assistant consumes MCP tools from `/mcp` (Docus + `@nuxtjs/mcp-toolkit`)
 - Cloudflare MCP transport requires runtime package `agents` (for `agents/mcp` import)
+- active Docus patch fixes MCP transport for Cloudflare Workers:
+  - uses `event.fetch` with relative paths for Nitro internal routing (avoids 522 self-fetch)
+  - sets `Accept: application/json, text/event-stream` header (avoids 406)
+  - see `.agents/context/i18n-patches.md` section 3 for full detail
 - custom project MCP tools:
   - `search-knowledge`
   - `list-insights`

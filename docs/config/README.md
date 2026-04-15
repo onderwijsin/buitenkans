@@ -24,9 +24,9 @@ config.
 - [`../../components.json`](../../components.json)
   - shadcn-vue style component config used for the local Inspira-style component setup
 - [`./docus-nl-locale-patch.md`](./docus-nl-locale-patch.md)
-  - temporary Dutch locale patch for Docus via `pnpm patch` (remove after upstream merge)
+  - comprehensive Docus patch reference: locale, OG font, MCP transport, type compat, sitemap
 - [`../../patches/docus@5.9.0.patch`](../../patches/docus@5.9.0.patch)
-  - active `pnpm patch` with Docus typecheck compatibility fixes and OG image font-family override
+  - active `pnpm patch` containing all Docus 5.9.0 fixes
 - [`../../shared/types/docus-types-compat.d.ts`](../../shared/types/docus-types-compat.d.ts)
   - temporary Nuxt schema compatibility shim for `RuntimeConfig` typing
 - [`../../app/components/OgImage/Docs.takumi.vue`](../../app/components/OgImage/Docs.takumi.vue)
@@ -66,7 +66,8 @@ Update these together with CI/CD env settings.
 
 - `assistant.model` is currently `mistral/mistral-medium`.
 - Keep this in sync with project AI policy and environment setup.
-- Dutch locale pnpm patch is active; see `docus-nl-locale-patch.md` for lifecycle/removal rules.
+- Dutch locale pnpm patch is active; see `docus-nl-locale-patch.md` for full patch inventory and
+  lifecycle/removal rules.
 
 ## OG Image Font Setup
 

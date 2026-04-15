@@ -23,6 +23,26 @@ Reason:
 
 Keep `agents` in `dependencies` (not only `devDependencies`).
 
+## MCP Transport Patch (Cloudflare Workers)
+
+The Docus assistant handler creates an MCP HTTP client that fetches the `/mcp` endpoint. On
+Cloudflare Workers, the default transport breaks in two ways:
+
+1. **Self-referencing fetch (522)** — The Worker HTTP-fetches its own public URL, routing through
+   Cloudflare's edge back to the same Worker, which times out.
+2. **Missing Accept header (406)** — The MCP server requires
+   `Accept: application/json, text/event-stream` for SSE transport. Default `fetch` does not set
+   this.
+
+The active Docus patch (`patches/docus@5.9.0.patch`) fixes this by:
+
+- Using Nitro's `event.fetch` with relative paths for internal routing (bypasses network entirely)
+- Setting the required `Accept` header
+- Converting `Headers` to a plain object for Nitro's internal handler compatibility
+
+See [`../config/docus-nl-locale-patch.md`](../config/docus-nl-locale-patch.md) (section 3) for full
+technical detail and removal criteria.
+
 ## Important Scope Clarification
 
 This repository does **not** currently implement custom AI backend routes for report generation.
