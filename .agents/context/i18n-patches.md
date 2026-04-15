@@ -1,23 +1,42 @@
-# i18n Patches (Agent)
+# Docus Patch Inventory (Agent)
 
-## Temporary Docus NL Locale Patch
-
-Active temporary patch:
+Active pnpm patch:
 
 - `patches/docus@5.9.0.patch`
 - `pnpm-workspace.yaml` -> `patchedDependencies.docus@5.9.0`
 
-Purpose:
+## 1. Dutch Locale Translations
 
-- Override incomplete/outdated Dutch Docus locale strings, especially assistant labels.
-- Avoid runtime `$localeMessages` redefinition errors.
+- Patches `i18n/locales/nl.json` with assistant UI strings.
+- Removal: upstream PRs #1335 or #1336 merged and released.
 
-Removal trigger:
+## 2. OG Image Font Family
 
-- Remove patch after either upstream PR is merged and released in the pinned Docus version:
-  - https://github.com/nuxt-content/docus/pull/1335
-  - https://github.com/nuxt-content/docus/pull/1336
+- Adds `fontFamily: 'Poppins'` to `defineOgImage()` in `app/pages/[[lang]]/[...slug].vue` and
+  `app/templates/landing.vue`.
+- Removal: upstream Docus supports stable OG font config or inherits project fonts.
 
-Human mirror:
+## 3. MCP Transport (Cloudflare Workers)
+
+- Patches `modules/assistant/runtime/server/api/search.ts`.
+- Adds `createSafeFetch()` wrapper:
+  - uses `event.fetch` for Nitro internal routing (avoids self-referencing fetch / 522)
+  - sets `Accept: application/json, text/event-stream` (avoids 406)
+  - converts `Headers` to plain object for Nitro handler compatibility
+- Injected into `createMCPClient({ transport: { ..., fetch } })`.
+- Removal: upstream Docus uses internal routing for same-origin MCP calls and sets required headers.
+
+## 4. Type Compatibility
+
+- Adds `as any` casts and import fix in `modules/config.ts` and `nuxt.config.ts`.
+- Guards `inferSiteURL()` with string type check.
+- Removal: upstream Docus releases Nuxt 4 compatible types.
+
+## 5. Sitemap Landing Collection
+
+- Removes landing collection query from `server/routes/sitemap.xml.ts`.
+- Removal: upstream Docus handles optional landing collections.
+
+## Human Mirror
 
 - `docs/config/docus-nl-locale-patch.md`

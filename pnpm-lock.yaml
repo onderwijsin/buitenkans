@@ -180,7 +180,7 @@ catalogs:
 
 patchedDependencies:
   docus@5.9.0:
-    hash: d7f5d83ac0fd5c20b19b355ed5c33800bd700473631cc4045ae99192258fa1fd
+    hash: bdcb78cd7efea2d96e3312b1499c67eaea31780e0c1707babcedc97a45b950e0
     path: patches/docus@5.9.0.patch
 
 importers:
@@ -294,7 +294,7 @@ importers:
         version: 6.1.7
       docus:
         specifier: 'catalog:'
-        version: 5.9.0(patch_hash=d7f5d83ac0fd5c20b19b355ed5c33800bd700473631cc4045ae99192258fa1fd)(3661fbe4be8d7304346c6ae99f96273f)
+        version: 5.9.0(patch_hash=bdcb78cd7efea2d96e3312b1499c67eaea31780e0c1707babcedc97a45b950e0)(3661fbe4be8d7304346c6ae99f96273f)
       eslint:
         specifier: 'catalog:'
         version: 9.39.2(jiti@2.6.1)
@@ -15685,7 +15685,7 @@ snapshots:
     dependencies:
       path-type: 4.0.0
 
-  docus@5.9.0(patch_hash=d7f5d83ac0fd5c20b19b355ed5c33800bd700473631cc4045ae99192258fa1fd)(3661fbe4be8d7304346c6ae99f96273f):
+  docus@5.9.0(patch_hash=bdcb78cd7efea2d96e3312b1499c67eaea31780e0c1707babcedc97a45b950e0)(3661fbe4be8d7304346c6ae99f96273f):
     dependencies:
       '@ai-sdk/gateway': 3.0.96(zod@4.3.6)
       '@ai-sdk/mcp': 1.0.36(zod@4.3.6)
