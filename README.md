@@ -60,6 +60,10 @@ For full non-technical project context, see [`ABOUT.md`](./ABOUT.md).
   - `/docs/inzichten/overzicht`
   - `/docs/duik-dieper/veelgestelde-vragen`
   - `/docs/duik-dieper/klankbordgroep`
+- raw markdown overrides for dynamic pages:
+  - `GET /raw/docs/inzichten/overzicht.md`
+  - `GET /raw/docs/duik-dieper/veelgestelde-vragen.md`
+  - `GET /raw/docs/duik-dieper/klankbordgroep.md`
 - server routes:
   - `GET /api/_sentry/trigger-error`
   - `GET /assets/**` (R2 blob serving)

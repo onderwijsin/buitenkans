@@ -18,14 +18,19 @@ defineOgImage('Docs' as keyof OgImageComponents, {
 const insights: {
 	title: string
 	description: string
-	to: string
+	to?: string
 	image?: { light: string; dark: string }
+	video?: string
 }[] = [
 	{
 		title: 'Laat iedereen gericht oriënteren',
 		description:
 			'Goede oriëntatie is cruciaal voor zij-instromers en doorstromers. Bied een gedeelde basis, met differentiatie naar achtergrond en realistisch beeld van de rol.',
-		to: '/docs/inzichten/gericht-orienteren'
+		to: '/docs/inzichten/gericht-orienteren',
+		image: {
+			light: '/graphics/gerichte_orientatie_light-mode.png',
+			dark: '/graphics/gerichte_orientatie_dark-mode.png'
+		}
 	},
 	{
 		title: 'Selecteer op potentieel en perspectief',
@@ -51,13 +56,17 @@ const insights: {
 		title: 'Organiseer meerjarige begeleiding',
 		description:
 			'Begeleiding stopt niet na de opleiding. Coaching, nazorg en community zijn essentieel voor duurzaam succes.',
-		to: '/docs/inzichten/meerjarige-begeleiding'
+		video: 'Buitenkans_landing_en_begeleiding_yvlpmf.mp4'
 	},
 	{
 		title: 'Faciliteer persoonlijke leerroutes',
 		description:
 			'Eén standaardtraject werkt niet. Maak modulaire opleidingsroutes die aansluiten op achtergrond, leerdoelen en ontwikkeltempo.',
-		to: '/docs/inzichten/persoonlijke-leerroutes'
+		to: '/docs/inzichten/persoonlijke-leerroutes',
+		image: {
+			light: '/graphics/persoonlijke_leerroutes_light-mode.png',
+			dark: '/graphics/persoonlijke_leerroutes_dark-mode.png'
+		}
 	},
 	{
 		title: 'Financier ook de oriëntatie',
@@ -70,6 +79,45 @@ const insights: {
 		}
 	}
 ]
+
+const logos: { src: string; alt: string }[] = [
+	{ src: '/logos/archipel.png', alt: 'Archipel Scholen' },
+	{ src: '/logos/ascenda.png', alt: 'Ascenda herregistratie' },
+	{ src: '/logos/attendiz.png', alt: 'Attendiz' },
+	{ src: '/logos/avs.png', alt: 'AVS academie & vakvereniging schoolleiders' },
+	{ src: '/logos/ijsselgraaf.png', alt: 'IJsselgraaf' },
+	{ src: '/logos/iselinge.png', alt: 'Iselinge Hogeschool' },
+	{ src: '/logos/keender.png', alt: 'Keender' },
+	{ src: '/logos/kpz.png', alt: 'Hogeschool KPZ' },
+	{ src: '/logos/lp.png', alt: 'LP' },
+	{ src: '/logos/mijnplein.png', alt: 'Mijnplein' },
+	{ src: '/logos/ocw.png', alt: 'Ministerie van Onderwijs, Cultuur en Wetenschap' },
+	{ src: '/logos/onderwijs_specialisten.png', alt: 'De Onderwijs Specialisten' },
+	{ src: '/logos/onderwijsin.png', alt: 'OnderwijsIn' },
+	{ src: '/logos/oponoa.png', alt: 'Stichting OPONOA' },
+	{ src: '/logos/paraat.png', alt: 'Paraat scholen' },
+	{ src: '/logos/pon.png', alt: 'PON' },
+	{ src: '/logos/poraad.png', alt: 'PO-Raad' },
+	{ src: '/logos/pro.png', alt: 'PRO8' },
+	{ src: '/logos/regio_on.png', alt: 'RegioON Onderwijsregio Oost-Nederland' },
+	{ src: '/logos/regio_twente-eo.png', alt: 'Onderwijsregio Twente & Omstreken' },
+	{ src: '/logos/samen_sopo.png', alt: 'Samen SopoW' },
+	{ src: '/logos/saxion.png', alt: 'Saxion Hogeschool' },
+	{ src: '/logos/sg_veluwezoom.png', alt: 'Scholengroep Veluwezoom' },
+	{ src: '/logos/skbg.svg', alt: 'SKBG' },
+	{
+		src: '/logos/ssotog.png',
+		alt: 'SOTOG Stichting Speciaal Onderwijs Twente en Oost Gelderland'
+	},
+	{ src: '/logos/tof.png', alt: 'TOF Onderwijs' },
+	{ src: '/logos/windesheim.svg', alt: 'Windesheim' },
+	{ src: '/logos/zwolle.png', alt: 'Onderwijsregio Zwolle en omgeving' }
+]
+
+// Split logos in even arrays for left and right marquee
+
+const leftMarquee = logos.filter((_, index) => index % 2 === 0)
+const rightMarquee = logos.filter((_, index) => index % 2 !== 0)
 
 const countMap = {
 	0: 'eerste',
@@ -103,6 +151,16 @@ function insightGridClass(index: number) {
 		: index % 2 === 0
 			? 'lg:col-span-2'
 			: 'lg:col-span-4'
+}
+
+function insightImageWidth(index: number) {
+	return Math.floor(index / 2) % 2 === 0
+		? index % 2 === 0
+			? 'w-[85%]'
+			: 'w-[60%]'
+		: index % 2 === 0
+			? 'w-[60%]'
+			: 'w-[85%]'
 }
 </script>
 
@@ -179,6 +237,7 @@ function insightGridClass(index: number) {
 							light="/graphics/buitenkans_light-mode.png"
 							dark="/graphics/buitenkans_dark-mode.png"
 							class="mx-auto w-[70%] py-8"
+							alt="project Buitenkans"
 						/>
 					</UPageCard>
 				</LandingReveal>
@@ -196,7 +255,8 @@ function insightGridClass(index: number) {
 							controls
 							loop
 							playsinline
-							src="https://res.cloudinary.com/nuxt/video/upload/v1767647099/studio/studio-demo_eiofld.mp4"
+							src="https://res.cloudinary.com/onderwijsin/video/upload/q_auto/f_auto/w_1200/Buitenkans_de_meerwaarde_van_zijinstromende_schoolleider_rnjq8j.mp4"
+							poster="https://res.cloudinary.com/onderwijsin/video/upload/so_10/q_auto/f_jpg/w_1200/Buitenkans_de_meerwaarde_van_zijinstromende_schoolleider_rnjq8j.mp4"
 						/>
 					</UPageCard>
 				</LandingReveal>
@@ -229,7 +289,19 @@ function insightGridClass(index: number) {
 						<UColorModeImage
 							v-if="card.image"
 							v-bind="card.image"
-							class="mx-auto w-3/5 py-8"
+							class="mx-auto py-8"
+							:class="insightImageWidth(i)"
+							:alt="card.title"
+							loading="lazy"
+						/>
+						<video
+							v-if="card.video"
+							class="rounded-md"
+							controls
+							loop
+							playsinline
+							:src="`https://res.cloudinary.com/onderwijsin/video/upload/q_auto/f_auto/w_1200/${card.video}`"
+							:poster="`https://res.cloudinary.com/onderwijsin/video/upload/so_5/q_auto/f_jpg/w_1200/${card.video}`"
 						/>
 					</UPageCard>
 				</LandingReveal>
@@ -279,13 +351,33 @@ function insightGridClass(index: number) {
 						title="Een handreiking van het veld"
 						description="Deze handreiking is ontwikkeld dóór en met het werkveld: een samenwerking tussen Onderwijsregio Oost-Nederland, Stichting Onderwijs in, hogescholen en landelijke partners."
 					>
-						<UMarquee>
-							<UIcon name="i-simple-icons-github" class="size-10 shrink-0" />
-							<UIcon name="i-simple-icons-discord" class="size-10 shrink-0" />
-							<UIcon name="i-simple-icons-x" class="size-10 shrink-0" />
-							<UIcon name="i-simple-icons-instagram" class="size-10 shrink-0" />
-							<UIcon name="i-simple-icons-linkedin" class="size-10 shrink-0" />
-							<UIcon name="i-simple-icons-facebook" class="size-10 shrink-0" />
+						<UMarquee :ui="{ root: '[--duration:30s]' }">
+							<div
+								v-for="(logo, index) in leftMarquee"
+								:key="index"
+								class="grid rounded-md bg-white p-4 dark:opacity-60"
+							>
+								<NuxtImg
+									:src="logo.src"
+									:alt="logo.alt"
+									loading="lazy"
+									class="h-8 w-auto object-contain object-center"
+								/>
+							</div>
+						</UMarquee>
+						<UMarquee reverse :ui="{ root: '[--duration:30s]' }">
+							<div
+								v-for="(logo, index) in rightMarquee"
+								:key="index"
+								class="grid rounded-md bg-white p-4 dark:opacity-60"
+							>
+								<NuxtImg
+									:src="logo.src"
+									:alt="logo.alt"
+									loading="lazy"
+									class="h-8 w-auto object-contain object-center"
+								/>
+							</div>
 						</UMarquee>
 					</UPageCard>
 				</LandingReveal>

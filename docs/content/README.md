@@ -6,7 +6,7 @@ This project uses Nuxt Content for both documentation pages and structured YAML 
 
 Defined in [`../../content.config.ts`](../../content.config.ts):
 
-- `faqs` (`content/faqs/**.yml`)
+- `faqs` (`content/faqs/**.md`)
 - `people` (`content/people/**.yml`)
 
 Docus page content is sourced from `content/docs/**` (docs collection managed by Docus layer).
@@ -42,3 +42,21 @@ Keep these stable unless a coordinated schema + UI change is requested.
 - `/docs/inzichten/overzicht` builds cards from docs markdown entries
 
 These pages are implemented in `app/pages/docs/**`.
+
+## Raw Markdown For AI/Agents
+
+Nuxt LLMs exposes `/raw/:path.md` for docs pages.
+
+For the three dynamic Vue-rendered pages above, this project overrides raw output with explicit
+server handlers so returned markdown mirrors the rendered page data (instead of placeholder body
+text from source markdown):
+
+- `server/routes/raw/docs/inzichten/overzicht.md.get.ts`
+- `server/routes/raw/docs/duik-dieper/veelgestelde-vragen.md.get.ts`
+- `server/routes/raw/docs/duik-dieper/klankbordgroep.md.get.ts`
+
+Shared formatter/helper logic lives in `server/utils/raw-markdown.ts`.
+
+Detailed lifecycle guidance (why/extend/remove):
+
+- [`../server/raw-markdown-overrides.md`](../server/raw-markdown-overrides.md)

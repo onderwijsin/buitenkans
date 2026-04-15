@@ -23,6 +23,8 @@ config.
   - Nuxt Content data collection schemas
 - [`../../components.json`](../../components.json)
   - shadcn-vue style component config used for the local Inspira-style component setup
+- [`./docus-nl-locale-patch.md`](./docus-nl-locale-patch.md)
+  - temporary Dutch locale patch for Docus via `pnpm patch` (remove after upstream merge)
 
 ## Runtime Notes
 
@@ -45,3 +47,4 @@ Update these together with CI/CD env settings.
 
 - `assistant.model` is currently `mistral/mistral-medium`.
 - Keep this in sync with project AI policy and environment setup.
+- Dutch locale pnpm patch is active; see `docus-nl-locale-patch.md` for lifecycle/removal rules.

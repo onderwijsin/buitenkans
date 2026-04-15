@@ -4,8 +4,8 @@ import { z } from 'zod'
 export default defineContentConfig({
 	collections: {
 		faqs: defineCollection({
-			type: 'data',
-			source: 'faqs/**.yml',
+			type: 'page',
+			source: 'faqs/**.md',
 			schema: z.object({
 				title: z.string(),
 				description: z.string()

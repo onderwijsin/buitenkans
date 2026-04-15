@@ -6,6 +6,7 @@
 
 - `change-workflow.md`
 - `documentation-workflow.md`
+- `raw-markdown-overrides.md`
 
 ## Human Mirrors
 

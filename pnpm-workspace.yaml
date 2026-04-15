@@ -67,5 +67,7 @@ ignoredBuiltDependencies:
 onlyBuiltDependencies:
   - better-sqlite3
   - sharp
+patchedDependencies:
+  docus@5.9.0: patches/docus@5.9.0.patch
 saveExact: true
 shamefullyHoist: true

@@ -8,11 +8,24 @@ This project currently uses AI through the **built-in Docus/Nuxt UI assistant**.
   - `assistant.model = 'mistral/mistral-medium'`
 - Assistant FAQ starter prompts in [`../../app/app.config.ts`](../../app/app.config.ts)
 - Gateway key in environment: `AI_GATEWAY_API_KEY` (see [`../../.example.env`](../../.example.env))
+- MCP-backed assistant tool surface available at `/mcp` (provided by Docus + `@nuxtjs/mcp-toolkit`)
 
 ## Important Scope Clarification
 
 This repository does **not** currently implement custom AI backend routes for report generation.
 There is no active `/api/ai/*` route stack in `server/api`.
+
+## Custom MCP Tools (Integrated Assistant)
+
+To improve assistant quality for project-specific questions, this repo adds custom MCP tools in
+[`../../server/mcp/tools`](../../server/mcp/tools):
+
+- `search-knowledge` — unified search across `docs`, `faqs`, and `people`
+- `list-insights` — structured list of all insight pages
+- `recommend-insights` — objective-driven recommendations for which insights to read first
+- `list-faqs` — FAQ listing with optional query filtering
+
+These tools are consumed by the Docus assistant runtime through the configured MCP server.
 
 ## Provider/Gateway Context
 

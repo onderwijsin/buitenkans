@@ -337,16 +337,16 @@ export default defineNuxtConfig({
 
 		sections: [
 			{
-				title: 'Inzichten',
+				title: 'Inzichten en hulpmiddelen',
 				description:
 					'Kerninzichten en succesfactoren voor het werven, selecteren, ontwikkelen en behouden van schoolleiders. Inclusief concrete aanbevelingen voor bestuurders en opleiders.',
-				contentCollection: 'items'
+				contentCollection: 'docs'
 			},
 			{
-				title: 'Bronnen, voorbeelden en andere hulpmiddelen',
+				title: 'Veelgestelde vragen',
 				description:
-					'Praktische tools, formats, voorbeeldtrajecten en achtergrondbronnen die helpen bij het ontwerpen en implementeren van regionale of bestuurlijke programma’s voor schoolleiderschap.',
-				contentCollection: 'resources'
+					'Praktische antwoorden op veelgestelde vragen over het project Buitenkans en de implementatie van instroomroutes voor schoolleiders.',
+				contentCollection: 'faqs'
 			}
 		]
 	}

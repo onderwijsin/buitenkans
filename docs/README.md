@@ -21,7 +21,11 @@ Policy:
 - [`conventions/README.md`](./conventions/README.md) - coding and change conventions
 - [`content/README.md`](./content/README.md) - content collections and editorial workflow
 - [`config/README.md`](./config/README.md) - config surface and runtime knobs
+- [`config/docus-nl-locale-patch.md`](./config/docus-nl-locale-patch.md) - temporary Docus Dutch
+  locale patch and removal criteria
 - [`server/README.md`](./server/README.md) - active server endpoints and behavior
+- [`server/raw-markdown-overrides.md`](./server/raw-markdown-overrides.md) - lifecycle for custom
+  `/raw/...md` route overrides
 - [`ai-integration/README.md`](./ai-integration/README.md) - Docus AI assistant integration
 - [`sentry/README.md`](./sentry/README.md) - observability setup
 - [`ci-cd/README.md`](./ci-cd/README.md) - GitHub Actions and deployment flow

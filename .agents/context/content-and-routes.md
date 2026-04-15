@@ -4,8 +4,8 @@
 
 Configured in `content.config.ts`:
 
-- `faqs`: `title`, `description`
-- `people`: `name`, `job`, `employer|null`, `avatar|null`
+- `faqs` (`content/faqs/**.md`): `title`, `description`
+- `people` (`content/people/**.yml`): `name`, `job`, `employer|null`, `avatar|null`
 
 Docus docs pages come from `content/docs/**`.
 
@@ -16,6 +16,20 @@ Docus docs pages come from `content/docs/**`.
 - `/docs/duik-dieper/veelgestelde-vragen` -> FAQ collection list
 - `/docs/duik-dieper/klankbordgroep` -> people collection list
 
+## Raw Markdown Overrides
+
+`nuxt-llms` provides `/raw/:path.md`, but these three dynamic pages are overridden so markdown
+output reflects rendered collection data:
+
+- `server/routes/raw/docs/inzichten/overzicht.md.get.ts`
+- `server/routes/raw/docs/duik-dieper/veelgestelde-vragen.md.get.ts`
+- `server/routes/raw/docs/duik-dieper/klankbordgroep.md.get.ts`
+
+Shared logic:
+
+- `server/utils/raw-markdown.ts`
+- extension/removal playbook: `.agents/patterns/raw-markdown-overrides.md`
+
 ## Server Routes
 
 Active files:
@@ -24,6 +38,9 @@ Active files:
 - `server/routes/assets/[...pathname].get.ts`
 - `server/api/content.get.ts`
 - `server/api/resources.get.ts`
+- `server/routes/raw/docs/inzichten/overzicht.md.get.ts`
+- `server/routes/raw/docs/duik-dieper/veelgestelde-vragen.md.get.ts`
+- `server/routes/raw/docs/duik-dieper/klankbordgroep.md.get.ts`
 
 `content.get.ts` and `resources.get.ts` query collections named `items` and `resources`. Keep these
 route collection names aligned with content collection configuration when using them.

@@ -7,6 +7,10 @@
 - production route rule prerenders `/**`
 - `/assets/**` served through blob route
 - `/stats` redirects to Plausible dashboard
+- temporary Docus Dutch locale patch active:
+  - `patches/docus@5.9.0.patch`
+  - `pnpm-workspace.yaml` patched dependency entry for `docus@5.9.0`
+  - removal trigger tracked in `.agents/context/i18n-patches.md`
 
 ## UI Runtime
 
@@ -39,6 +43,12 @@ Automation:
 
 - `assistant.model = 'mistral/mistral-medium'`
 - gateway key from `AI_GATEWAY_API_KEY`
+- assistant consumes MCP tools from `/mcp` (Docus + `@nuxtjs/mcp-toolkit`)
+- custom project MCP tools:
+  - `search-knowledge`
+  - `list-insights`
+  - `recommend-insights`
+  - `list-faqs`
 - no custom `/api/ai/*` feature set currently present
 
 ## Testing State
