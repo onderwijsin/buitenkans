@@ -1,0 +1,72 @@
+# Server Runtime
+
+This document describes active server routes and runtime behavior.
+
+## Active Server Files
+
+- `server/api/_sentry/trigger-error.get.ts`
+- `server/api/content.get.ts`
+- `server/api/resources.get.ts`
+- `server/mcp/tools/search-knowledge.ts`
+- `server/mcp/tools/list-insights.ts`
+- `server/mcp/tools/recommend-insights.ts`
+- `server/mcp/tools/list-faqs.ts`
+- `server/routes/assets/[...pathname].get.ts`
+- `server/routes/raw/docs/inzichten/overzicht.md.get.ts`
+- `server/routes/raw/docs/duik-dieper/klankbordgroep.md.get.ts`
+- `server/routes/raw/docs/duik-dieper/veelgestelde-vragen.md.get.ts`
+- `server/plugins/sentry-cloudflare-plugin.ts`
+- `server/utils/raw-markdown.ts`
+- `server/utils/security/admin.ts`
+
+## Route Summary
+
+### `POST /mcp` (MCP server)
+
+Docus includes an MCP server that powers the integrated assistant.
+
+In addition to Docus defaults (`list-pages`, `get-page`), this project provides custom tools in
+`server/mcp/tools/*` for domain-specific retrieval and recommendations.
+
+Cloudflare deployment note:
+
+- `@nuxtjs/mcp-toolkit` Cloudflare provider imports `agents/mcp`.
+- `agents` must be present in project `dependencies` or Nitro build will fail to resolve it.
+
+### `GET /api/_sentry/trigger-error`
+
+Intentional throw route used to verify Sentry capture.
+
+### `GET /assets/**`
+
+Serves media from `hub:blob` (R2 binding) and prepends `/assets/` to Studio-uploaded paths.
+
+### `GET /api/content` and `GET /api/resources`
+
+These routes query markdown collections named `items` and `resources`.
+
+If these routes are used in your deployment flow, keep route collection names and content collection
+configuration aligned.
+
+### `GET /raw/docs/**.md` (dynamic override subset)
+
+Nuxt Content + `nuxt-llms` already provides a default `/raw/:path.md` endpoint.
+
+This project intentionally overrides three routes where frontend pages are Vue-rendered from dynamic
+collections, to ensure raw markdown matches what users and agents see in the frontend:
+
+- `/raw/docs/inzichten/overzicht.md`
+- `/raw/docs/duik-dieper/klankbordgroep.md`
+- `/raw/docs/duik-dieper/veelgestelde-vragen.md`
+
+See [`./raw-markdown-overrides.md`](./raw-markdown-overrides.md) for rationale, extension steps, and
+removal criteria.
+
+## Security Utility
+
+`server/utils/security/admin.ts` checks admin token headers:
+
+- `x-admin-token: <API_TOKEN>`
+- `Authorization: Bearer <API_TOKEN>`
+
+This helper is available for trusted server-to-server checks.
