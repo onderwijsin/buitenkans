@@ -188,7 +188,12 @@ export default defineEventHandler(async (event) => {
 	const httpClient = await createMCPClient({
 		transport: { type: 'http', url: mcpUrl, fetch: createSafeFetch() }
 	})
+
+	console.error('MCP INIT START', { mcpUrl })
+
 	const mcpTools = await httpClient.tools()
+
+	console.error('MCP INIT DONE')
 
 	const stream = createUIMessageStream({
 		execute: async ({ writer }: { writer: UIMessageStreamWriter }) => {

@@ -1,5 +1,5 @@
 <template>
-	<UMain>
+	<div>
 		<PatternBackground
 			class="fixed! z-0 h-screen w-screen"
 			animate
@@ -8,8 +8,9 @@
 			mask="ellipse-top"
 			size="md"
 			:speed="25000"
-		>
-		</PatternBackground>
-		<slot />
-	</UMain>
+		/>
+		<UMain class="relative" style="z-index: 1">
+			<slot />
+		</UMain>
+	</div>
 </template>

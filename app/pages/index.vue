@@ -166,7 +166,7 @@ function insightImageWidth(index: number) {
 </script>
 
 <template>
-	<div>
+	<div class="overflow-x-clip">
 		<UPageHero
 			:ui="{
 				container: 'pb-0 sm:pb-0 md:pb-0 lg:pb-0',
@@ -218,7 +218,11 @@ function insightImageWidth(index: number) {
 		<UPageSection>
 			<UPageGrid class="lg:grid-cols-6">
 				<!-- CARD 1 -->
-				<LandingReveal class="group col-span-2" direction="left" :delay-ms="40">
+				<LandingReveal
+					class="group col-span-1 sm:col-span-2"
+					direction="left"
+					:delay-ms="40"
+				>
 					<UPageCard class="h-full" spotlight>
 						<template #title>
 							Over <span class="text-primary">Buitenkans</span>
@@ -244,7 +248,11 @@ function insightImageWidth(index: number) {
 				</LandingReveal>
 
 				<!-- CARD 2 -->
-				<LandingReveal class="col-span-2 lg:col-span-4" direction="right" :delay-ms="80">
+				<LandingReveal
+					class="col-span-1 sm:col-span-2 lg:col-span-4"
+					direction="right"
+					:delay-ms="80"
+				>
 					<UPageCard
 						class="h-full"
 						spotlight
@@ -266,7 +274,7 @@ function insightImageWidth(index: number) {
 				<LandingReveal
 					v-for="(card, i) in insights"
 					:key="i"
-					class="col-span-2"
+					class="col-span-1 sm:col-span-2"
 					:class="insightGridClass(i)"
 					:direction="insightDirection(i)"
 					:delay-ms="120 + i * 45"
@@ -308,7 +316,7 @@ function insightImageWidth(index: number) {
 				</LandingReveal>
 
 				<!-- CTA -->
-				<LandingReveal class="col-span-2" direction="up-left" :delay-ms="440">
+				<LandingReveal class="col-span-1 sm:col-span-2" direction="up-left" :delay-ms="440">
 					<UPageCard
 						class="h-full"
 						variant="subtle"
@@ -343,16 +351,19 @@ function insightImageWidth(index: number) {
 
 				<!-- PEOPLE AND ORGS -->
 				<LandingReveal
-					class="col-span-2 md:min-h-68 lg:col-span-4"
+					class="col-span-1 min-w-0 sm:col-span-2 md:min-h-68 lg:col-span-4"
 					direction="up-right"
 					:delay-ms="500"
 				>
 					<UPageCard
-						class="h-full"
+						class="h-full min-w-0 overflow-x-hidden"
 						title="Een handreiking van het veld"
 						description="Deze handreiking is ontwikkeld dóór en met het werkveld: een samenwerking tussen Onderwijsregio Oost-Nederland, Stichting Onderwijs in, hogescholen en landelijke partners."
 					>
-						<UMarquee :ui="{ root: '[--duration:30s]' }">
+						<UMarquee
+							class="w-full min-w-0"
+							:ui="{ root: '[--duration:30s]', content: '!justify-start !w-max' }"
+						>
 							<div
 								v-for="(logo, index) in leftMarquee"
 								:key="index"
@@ -366,7 +377,11 @@ function insightImageWidth(index: number) {
 								/>
 							</div>
 						</UMarquee>
-						<UMarquee reverse :ui="{ root: '[--duration:30s]' }">
+						<UMarquee
+							reverse
+							class="w-full min-w-0"
+							:ui="{ root: '[--duration:30s]', content: '!justify-start !w-max' }"
+						>
 							<div
 								v-for="(logo, index) in rightMarquee"
 								:key="index"
