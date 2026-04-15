@@ -15,7 +15,12 @@ defineOgImage('Docs' as keyof OgImageComponents, {
 	description: formatOgDescription(APP_IDENTITY.siteTitle, APP_IDENTITY.siteDescription)
 })
 
-const insights: { title: string; description: string; to: string }[] = [
+const insights: {
+	title: string
+	description: string
+	to: string
+	image?: { light: string; dark: string }
+}[] = [
 	{
 		title: 'Laat iedereen gericht oriënteren',
 		description:
@@ -26,13 +31,21 @@ const insights: { title: string; description: string; to: string }[] = [
 		title: 'Selecteer op potentieel en perspectief',
 		description:
 			'Kijk verder dan geschiktheid en maak zichtbaar wat iemand al kan en nog moet ontwikkelen.',
-		to: '/docs/inzichten/potentieel-en-perspectief'
+		to: '/docs/inzichten/potentieel-en-perspectief',
+		image: {
+			light: '/graphics/perspectief_light-mode.png',
+			dark: '/graphics/perspectief_dark-mode.png'
+		}
 	},
 	{
 		title: 'Ontwikkel leider én school',
 		description:
 			'Niet alleen de kandidaat ontwikkelt zich. Ook school en bestuur moeten verwachtingen expliciteren en ruimte maken voor nieuw leiderschap.',
-		to: '/docs/inzichten/leider-en-school'
+		to: '/docs/inzichten/leider-en-school',
+		image: {
+			light: '/graphics/leider_en_school_light-mode.png',
+			dark: '/graphics/leider_en_school_dark-mode.png'
+		}
 	},
 	{
 		title: 'Organiseer meerjarige begeleiding',
@@ -50,7 +63,11 @@ const insights: { title: string; description: string; to: string }[] = [
 		title: 'Financier ook de oriëntatie',
 		description:
 			'Oriëntatie en selectie kosten tijd en geld. Maak deze fase onderdeel van het traject en onderzoek structurele financiering.',
-		to: '/docs/inzichten/financier-orientatie'
+		to: '/docs/inzichten/financier-orientatie',
+		image: {
+			light: '/graphics/financier_orientatie_light-mode.png',
+			dark: '/graphics/financier_orientatie_dark-mode.png'
+		}
 	}
 ]
 
@@ -70,6 +87,22 @@ function insightCountLabel(index: number) {
 	const modifier = countMap[index as keyof typeof countMap] ?? `${index + 1}e`
 
 	return `het ${modifier} inzicht`
+}
+
+const insightDirections = ['up', 'left', 'right', 'down', 'up-right', 'up-left'] as const
+
+function insightDirection(index: number) {
+	return insightDirections[index % insightDirections.length]
+}
+
+function insightGridClass(index: number) {
+	return Math.floor(index / 2) % 2 === 0
+		? index % 2 === 0
+			? 'lg:col-span-4'
+			: 'lg:col-span-2'
+		: index % 2 === 0
+			? 'lg:col-span-2'
+			: 'lg:col-span-4'
 }
 </script>
 
@@ -126,115 +159,136 @@ function insightCountLabel(index: number) {
 		<UPageSection>
 			<UPageGrid class="lg:grid-cols-6">
 				<!-- CARD 1 -->
-				<UPageCard spotlight class="group col-span-2">
-					<template #title> Over <span class="text-primary">Buitenkans</span> </template>
-					<template #description
-						>Het project
-						<NuxtLink
-							class="text-highlighted font-medium underline"
-							to="https://onderwijsin.nl/projecten/toekomst-maken-doe-je-samen-ook-in-schoolleiderschap"
-							>Buitenkans</NuxtLink
+				<LandingReveal class="group col-span-2" direction="left" :delay-ms="40">
+					<UPageCard class="h-full" spotlight>
+						<template #title>
+							Over <span class="text-primary">Buitenkans</span>
+						</template>
+						<template #description
+							>Het project
+							<NuxtLink
+								class="text-highlighted font-medium underline"
+								to="https://onderwijsin.nl/projecten/toekomst-maken-doe-je-samen-ook-in-schoolleiderschap"
+								>Buitenkans</NuxtLink
+							>
+							verkent hoe we nieuwe routes naar schoolleiderschap ontwikkelen, met
+							aandacht voor zij-instroom en doorstroom, en wat dit vraagt van
+							besturen, opleidingen en scholen.</template
 						>
-						verkent hoe we nieuwe routes naar schoolleiderschap ontwikkelen, met
-						aandacht voor zij-instroom en doorstroom, en wat dit vraagt van besturen,
-						opleidingen en scholen.</template
-					>
-					<!-- <FloatingNuxt /> -->
-				</UPageCard>
+						<UColorModeImage
+							light="/graphics/buitenkans_light-mode.png"
+							dark="/graphics/buitenkans_dark-mode.png"
+							class="mx-auto w-[70%] py-8"
+						/>
+					</UPageCard>
+				</LandingReveal>
 
 				<!-- CARD 2 -->
-				<UPageCard
-					spotlight
-					class="col-span-2 lg:col-span-4"
-					title="Ervaringsdeskundigen staan centraal"
-					description="Geleerde lessen uit wat bestuurders, opleiders en zij-instromers zelf vertellen."
-				>
-					<video
-						class="rounded-md"
-						controls
-						loop
-						playsinline
-						src="https://res.cloudinary.com/nuxt/video/upload/v1767647099/studio/studio-demo_eiofld.mp4"
-					/>
-				</UPageCard>
+				<LandingReveal class="col-span-2 lg:col-span-4" direction="right" :delay-ms="80">
+					<UPageCard
+						class="h-full"
+						spotlight
+						title="Ervaringsdeskundigen staan centraal"
+						description="Geleerde lessen uit wat bestuurders, opleiders en zij-instromers zelf vertellen."
+					>
+						<video
+							class="rounded-md"
+							controls
+							loop
+							playsinline
+							src="https://res.cloudinary.com/nuxt/video/upload/v1767647099/studio/studio-demo_eiofld.mp4"
+						/>
+					</UPageCard>
+				</LandingReveal>
 
 				<!-- INSIGHTS -->
-				<UPageCard
+				<LandingReveal
 					v-for="(card, i) in insights"
 					:key="i"
-					spotlight
 					class="col-span-2"
-					:class="[
-						Math.floor(i / 2) % 2 === 0
-							? i % 2 === 0
-								? 'lg:col-span-4'
-								: 'lg:col-span-2' // [4,2]
-							: i % 2 === 0
-								? 'lg:col-span-2'
-								: 'lg:col-span-4' // [2,4]
-					]"
-					:title="card.title"
-					:description="card.description"
-					:to="card.to"
+					:class="insightGridClass(i)"
+					:direction="insightDirection(i)"
+					:delay-ms="120 + i * 45"
 				>
-					<template #leading>
-						<UBadge
-							size="sm"
-							color="primary"
-							variant="subtle"
-							icon="lucide:lightbulb"
-							:label="insightCountLabel(i)"
+					<UPageCard
+						class="h-full"
+						spotlight
+						:title="card.title"
+						:description="card.description"
+						:to="card.to"
+					>
+						<template #leading>
+							<UBadge
+								size="sm"
+								color="primary"
+								variant="subtle"
+								icon="lucide:lightbulb"
+								:label="insightCountLabel(i)"
+							/>
+						</template>
+						<UColorModeImage
+							v-if="card.image"
+							v-bind="card.image"
+							class="mx-auto w-3/5 py-8"
 						/>
-					</template>
-				</UPageCard>
+					</UPageCard>
+				</LandingReveal>
 
 				<!-- CTA -->
-				<UPageCard
-					variant="subtle"
-					class="col-span-2"
-					title="Aan de slag!"
-					description="Ontdek alle inzichten, lessen, handige tips en tools die Buitenkans heeft opgeleverd."
-				>
-					<div class="mx-auto flex w-full max-w-xs flex-col gap-3 text-center">
-						<UButton
-							block
-							color="primary"
-							size="lg"
-							to="/docs/inzichten/overzicht"
-							trailing-icon="i-lucide-arrow-right"
-						>
-							Ontdek de inzichten
-						</UButton>
+				<LandingReveal class="col-span-2" direction="up-left" :delay-ms="440">
+					<UPageCard
+						class="h-full"
+						variant="subtle"
+						title="Aan de slag!"
+						description="Ontdek alle inzichten, lessen, handige tips en tools die Buitenkans heeft opgeleverd."
+					>
+						<div class="mx-auto flex w-full max-w-xs flex-col gap-3 text-center">
+							<UButton
+								block
+								color="primary"
+								size="lg"
+								to="/docs/inzichten/overzicht"
+								trailing-icon="i-lucide-arrow-right"
+							>
+								Ontdek de inzichten
+							</UButton>
 
-						<UButton
-							block
-							color="neutral"
-							icon="lucide:info"
-							size="lg"
-							to="/docs/duik-dieper/achtergrond"
-							target="_blank"
-							variant="outline"
-						>
-							Over deze handreiking
-						</UButton>
-					</div>
-				</UPageCard>
+							<UButton
+								block
+								color="neutral"
+								icon="lucide:info"
+								size="lg"
+								to="/docs/duik-dieper/achtergrond"
+								target="_blank"
+								variant="outline"
+							>
+								Over deze handreiking
+							</UButton>
+						</div>
+					</UPageCard>
+				</LandingReveal>
 
 				<!-- PEOPLE AND ORGS -->
-				<UPageCard
+				<LandingReveal
 					class="col-span-2 md:min-h-68 lg:col-span-4"
-					title="Een handreiking van het veld"
-					description="Deze handreiking is ontwikkeld dóór en met het werkveld: een samenwerking tussen Onderwijsregio Oost-Nederland, Stichting Onderwijs in, hogescholen en landelijke partners."
+					direction="up-right"
+					:delay-ms="500"
 				>
-					<UMarquee>
-						<UIcon name="i-simple-icons-github" class="size-10 shrink-0" />
-						<UIcon name="i-simple-icons-discord" class="size-10 shrink-0" />
-						<UIcon name="i-simple-icons-x" class="size-10 shrink-0" />
-						<UIcon name="i-simple-icons-instagram" class="size-10 shrink-0" />
-						<UIcon name="i-simple-icons-linkedin" class="size-10 shrink-0" />
-						<UIcon name="i-simple-icons-facebook" class="size-10 shrink-0" />
-					</UMarquee>
-				</UPageCard>
+					<UPageCard
+						class="h-full"
+						title="Een handreiking van het veld"
+						description="Deze handreiking is ontwikkeld dóór en met het werkveld: een samenwerking tussen Onderwijsregio Oost-Nederland, Stichting Onderwijs in, hogescholen en landelijke partners."
+					>
+						<UMarquee>
+							<UIcon name="i-simple-icons-github" class="size-10 shrink-0" />
+							<UIcon name="i-simple-icons-discord" class="size-10 shrink-0" />
+							<UIcon name="i-simple-icons-x" class="size-10 shrink-0" />
+							<UIcon name="i-simple-icons-instagram" class="size-10 shrink-0" />
+							<UIcon name="i-simple-icons-linkedin" class="size-10 shrink-0" />
+							<UIcon name="i-simple-icons-facebook" class="size-10 shrink-0" />
+						</UMarquee>
+					</UPageCard>
+				</LandingReveal>
 			</UPageGrid>
 		</UPageSection>
 	</div>

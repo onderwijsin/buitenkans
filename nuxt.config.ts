@@ -68,7 +68,9 @@ export default defineNuxtConfig({
 	},
 
 	experimental: {
-		inlineRouteRules: true
+		inlineRouteRules: true,
+		// Temporary mitigation for duplicate internal `useAppConfig` auto-import warnings in Nuxt/Nitro.
+		serverAppConfig: false
 	},
 
 	$development: {

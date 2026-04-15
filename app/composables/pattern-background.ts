@@ -18,7 +18,7 @@ export const PATTERN_BACKGROUND_DIRECTION = {
 
 export type PatternBackgroundDirection = ObjectValues<typeof PATTERN_BACKGROUND_DIRECTION>
 
-export interface BaseProps {
+export interface PatternBackgroundProps {
 	class?: HTMLAttributes['class']
 	animate?: boolean
 	direction?: PatternBackgroundDirection
@@ -86,5 +86,3 @@ export const patternBackgroundMaskVariants = cva('bg-default bg-background', {
 })
 
 export type PatternBackgroundMaskVariants = VariantProps<typeof patternBackgroundMaskVariants>
-
-export { default as PatternBackground } from './PatternBackground.vue'

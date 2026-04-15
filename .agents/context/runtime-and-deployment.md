@@ -11,7 +11,8 @@
 ## UI Runtime
 
 - Core UI: Nuxt UI
-- Single local Inspira/shadcn-style component: `app/components/ui/pattern-background/*`
+- Single local Inspira/shadcn-style component: `app/components/PatternBackground.vue` +
+  `app/composables/pattern-background.ts`
 - shadcn-style config: `components.json`
 
 ## Cloudflare Bindings

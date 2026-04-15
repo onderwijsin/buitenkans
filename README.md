@@ -83,9 +83,8 @@ Primary UI library is **Nuxt UI**.
 
 This project also includes one local component inspired by Inspira UI:
 
-- [`app/components/ui/pattern-background/PatternBackground.vue`](./app/components/ui/pattern-background/PatternBackground.vue)
-- helper/types:
-  [`app/components/ui/pattern-background/index.ts`](./app/components/ui/pattern-background/index.ts)
+- [`app/components/PatternBackground.vue`](./app/components/PatternBackground.vue)
+- helper/types: [`app/composables/pattern-background.ts`](./app/composables/pattern-background.ts)
 
 That component uses `@inspira-ui/plugins` helpers and follows the shadcn-vue style config in:
 

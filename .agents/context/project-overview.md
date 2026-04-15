@@ -13,7 +13,8 @@ Active runtime features:
 - Docus AI assistant configured with Mistral model
 - Cloudflare Worker deployment
 - Nuxt UI as primary UI system
-- one local Inspira/shadcn-style component (`app/components/ui/pattern-background/*`)
+- one local Inspira/shadcn-style component (`app/components/PatternBackground.vue` +
+  `app/composables/pattern-background.ts`)
 
 ## Core Directories
 

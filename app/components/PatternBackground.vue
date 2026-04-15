@@ -1,18 +1,16 @@
 <script setup lang="ts">
-import type { BaseProps as Props } from '.'
+import type { PatternBackgroundProps } from '~/composables/pattern-background'
 
 import { cn } from '@inspira-ui/plugins'
-import { computed } from 'vue'
-
 import {
 	PATTERN_BACKGROUND_DIRECTION,
 	PATTERN_BACKGROUND_SPEED,
 	PATTERN_BACKGROUND_VARIANT,
 	patternBackgroundMaskVariants,
 	patternBackgroundVariants
-} from '.'
+} from '~/composables/pattern-background'
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<PatternBackgroundProps>(), {
 	direction: () => PATTERN_BACKGROUND_DIRECTION.Top,
 	variant: () => PATTERN_BACKGROUND_VARIANT.Grid,
 	speed: () => PATTERN_BACKGROUND_SPEED.Slow,

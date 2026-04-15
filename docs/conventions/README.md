@@ -20,7 +20,8 @@ Practical conventions for contributors.
 
 1. Nuxt UI is the core UI library.
 2. This project includes one local component derived from Inspira/shadcn patterns:
-   - `app/components/ui/pattern-background/*`
+   - `app/components/PatternBackground.vue`
+   - `app/composables/pattern-background.ts`
 3. Keep shadcn-style component config aligned in `components.json`.
 4. Do not introduce additional Inspira/shadcn-derived components unless explicitly requested.
 

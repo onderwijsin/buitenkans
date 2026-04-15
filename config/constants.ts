@@ -30,7 +30,7 @@ export const NUXT_BEHAVIOR_CONFIG = {
 	/** Nuxt/Nitro compatibility date for runtime behavior. */
 	compatibilityDate: '2026-01-05',
 	/** Explicit prerender entry routes for static generation. */
-	nitroPrerenderRoutes: ['/overview'],
+	nitroPrerenderRoutes: ['/'],
 	/** Max CPU budget (ms) for Cloudflare worker requests. */
 	nitroCpuMs: 30000,
 	/** TOC depth used by Nuxt Content markdown build step. */
