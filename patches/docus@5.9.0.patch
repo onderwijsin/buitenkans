@@ -1,3 +1,27 @@
+diff --git a/app/pages/[[lang]]/[...slug].vue b/app/pages/[[lang]]/[...slug].vue
+index 0f0c11c4db4acefe1cd349b8a5dd99c9ceabf7af..6bf8ed523d859403641d33ff35ae4d97af787219 100644
+--- a/app/pages/[[lang]]/[...slug].vue
++++ b/app/pages/[[lang]]/[...slug].vue
+@@ -49,6 +49,7 @@ defineOgImage('Docs', {
+   headline: headline.value,
+   title: title?.slice(0, 60),
+   description: formatOgDescription(title, description),
++  fontFamily: 'Poppins',
+ })
+ 
+ const github = computed(() => appConfig.github ? appConfig.github : null)
+diff --git a/app/templates/landing.vue b/app/templates/landing.vue
+index 160ee000099448105fe396eff1140d53b6ae1982..d34bf3220161d83b670bc6d7f777a3aa95c5187e 100644
+--- a/app/templates/landing.vue
++++ b/app/templates/landing.vue
+@@ -26,6 +26,7 @@ if (!page.value?.seo?.ogImage) {
+   defineOgImage('Landing', {
+     title: title?.slice(0, 60),
+     description: formatOgDescription(title, description),
++    fontFamily: 'Poppins',
+   })
+ }
+ </script>
 diff --git a/i18n/locales/nl.json b/i18n/locales/nl.json
 index f72dff99fa71300e2fa10726523197fcc57158a5..1098e9a464ab4b4551ce04c4cf1375bdd1d0a2af 100644
 --- a/i18n/locales/nl.json

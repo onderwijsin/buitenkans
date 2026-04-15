@@ -12,7 +12,8 @@ useSeo({
 defineOgImage('Docs' as keyof OgImageComponents, {
 	headline: 'Handreiking',
 	title: APP_IDENTITY.siteTitle?.slice(0, 60),
-	description: formatOgDescription(APP_IDENTITY.siteTitle, APP_IDENTITY.siteDescription)
+	description: formatOgDescription(APP_IDENTITY.siteTitle, APP_IDENTITY.siteDescription),
+	fontFamily: 'Poppins'
 })
 
 const insights: {

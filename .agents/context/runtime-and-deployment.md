@@ -32,6 +32,10 @@
 - Single local Inspira/shadcn-style component: `app/components/PatternBackground.vue` +
   `app/composables/pattern-background.ts`
 - shadcn-style config: `components.json`
+- OG image templates are locally overridden:
+  - `app/components/OgImage/Docs.takumi.vue`
+  - `app/components/OgImage/Landing.takumi.vue`
+  - both force `font-family: 'Poppins', sans-serif`
 
 ## Cloudflare Bindings
 
@@ -65,6 +69,17 @@ Automation:
   - `recommend-insights`
   - `list-faqs`
 - no custom `/api/ai/*` feature set currently present
+
+## OG Font Guardrails
+
+- `@nuxt/fonts` provides `Poppins` with `global: true` in `nuxt.config.ts`.
+- Docus base OG generation requires explicit `fontFamily` to avoid fallback font rendering.
+- Active implementation:
+  - custom pages call `defineOgImage(..., { fontFamily: 'Poppins' })`
+  - `patches/docus@5.9.0.patch` injects `fontFamily: 'Poppins'` into Docus docs/landing OG calls
+- Removal criteria:
+  - only remove Docus patch lines when upstream Docus supports a stable OG font config route or no
+    longer needs explicit family to use configured project fonts.
 
 ## Testing State
 
