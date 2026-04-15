@@ -1,11 +1,13 @@
-# Implementation Patterns
+# Patterns
 
-`patterns/` defines expected implementation style for recurring work.
+`patterns/` contains execution playbooks for recurring work.
 
 ## Files
 
-- TODO add file refs
+- `change-workflow.md`
+- `documentation-workflow.md`
 
-## Human Sources
+## Human Mirrors
 
-- TODO add file refs
+- `../docs/agent-guide/README.md`
+- `../docs/conventions/README.md`

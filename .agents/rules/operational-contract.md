@@ -1,36 +1,34 @@
-# Operational Contract
+# Operational Contract (Agent)
 
-Primary source: `AGENTS.md`.
+Primary human source: `AGENTS.md`.
 
-## Critical Rules (MUST)
+## MUST
 
-- Do not introduce breaking UX or data-shape changes without explicit request.
-- Keep edge/runtime compatibility intact.
-- Do not add dependencies unless explicitly asked.
-- Preserve existing naming and file contracts unless explicitly requested.
-- Keep docs synchronized in both `docs/` (humans) and `.agents/` (agents).
-- Keep test files path-aligned with source files.
-- Do not change pinned versions of `typescript`, `eslint` without explicit approval.
+- Do not introduce breaking UX/content-shape changes unless requested.
+- Preserve Cloudflare edge/runtime compatibility.
+- Do not add dependencies unless requested.
+- Preserve established naming and file contracts unless requested.
+- Keep active docs synchronized across `docs/` and `.agents/`.
+- Do not edit `.agents/skills/**` unless explicitly requested.
 
-## Working Defaults (SHOULD)
+## SHOULD
 
-- Keep presentational concerns in Nuxt components and reusable logic in composables.
-- Keep Nuxt route handlers in `server/api/*` and helpers in `server/utils/*`.
+- Keep UI logic in components/layouts and reusable behavior in composables.
+- Keep API boundary code in `server/api/*` and helper logic in `server/utils/*`.
 - Use Zod for boundary validation.
-- Prefer small, scoped changes.
-- Add or update tests for touched runtime logic.
+- Prefer small scoped diffs.
 
-## Definition of Done Checklist
+## Validation Baseline
 
-1. Relevant lint/typecheck/test/build checks pass for touched scope.
-2. Test path and coverage rules remain aligned with conventions.
-3. User-facing data contracts remain backward compatible unless explicitly changed.
-4. Non-obvious behavior or architecture changes are documented in both `docs/` and `.agents/`.
+Run for meaningful changes:
 
-## Rule Priority
+- `pnpm lint`
+- `pnpm typecheck`
 
-1. User-facing data contracts and persisted-state semantics.
-2. Runtime/edge compatibility and deployment constraints.
-3. Correctness and safety in high-risk modules.
-4. Existing architecture patterns and module boundaries.
-5. Style and naming conventions.
+## Priority Order
+
+1. User-facing behavior/contracts
+2. Runtime and deployment safety
+3. Correctness
+4. Architecture consistency
+5. Style

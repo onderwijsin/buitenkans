@@ -1,13 +1,14 @@
 # Rules
 
-`rules/` contains hard constraints and operational policy for agents.
+`rules/` contains hard constraints for agent changes.
 
 ## Files
 
-- `operational-contract.md`: repository-level must/should constraints and DoD checks.
-- `documentation-sync.md`: dual-home documentation rule and sync workflow.
+- `operational-contract.md`
+- `documentation-sync.md`
 
-## Human Sources
+## Human Mirrors
 
-- `AGENTS.md`
-- TODO add file refs
+- `../AGENTS.md`
+- `../docs/agent-guide/README.md`
+- `../docs/conventions/README.md`

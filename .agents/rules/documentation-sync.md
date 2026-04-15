@@ -1,39 +1,26 @@
 # Documentation Sync Rule
 
-Human policy companion: `TODO add file ref`.
-
 ## Core Policy
 
 - `docs/` is for humans.
 - `.agents/` is for agents.
 - Active information must exist in both places.
 
-## Scope
+## Mandatory Rule
 
-Keep both surfaces synchronized for:
+Do not update one side without updating the mirror side in the same change.
 
-- Architecture and workspace boundaries.
-- Runtime and deployment behavior.
-- Coding/testing conventions.
-- Security-sensitive operational behavior.
-- Validation workflows and command contracts.
+## Mirror Map
 
-## Required Workflow
+- `README.md` <-> `.agents/context/project-overview.md`
+- `docs/content/README.md` <-> `.agents/context/content-and-routes.md`
+- `docs/config/README.md` + `docs/ci-cd/README.md` <-> `.agents/context/runtime-and-deployment.md`
+- `AGENTS.md` + `docs/conventions/README.md` <-> `.agents/rules/operational-contract.md`
+- `docs/agent-guide/README.md` <-> `.agents/README.md` + `.agents/patterns/*`
 
-1. Update relevant file(s) in `docs/`.
-2. Update corresponding file(s) in `.agents/`.
-3. Add or fix cross-links between both locations.
-4. Verify commands/examples are consistent.
+## Skills Boundary
 
-## Mapping Baseline
+Installed skills are treated as external dependencies.
 
-- `docs/README.md` <-> `.agents/README.md`
-- `docs/conventions.md` <-> `.agents/rules/*` + `.agents/patterns/*`
-- `docs/monorepo-setup.md` <-> `.agents/context/architecture.md`
-- `docs/directus/*.md` <-> `.agents/context/directus-domain.md`
-- `docs/nuxt/*.md` <-> `.agents/context/nuxt-security.md`
-- `docs/testing.md` <-> `.agents/patterns/testing-and-validation.md`
-
-## PR Review Rule
-
-Treat missing mirror updates as incomplete documentation.
+- Do not modify `.agents/skills/**` in normal documentation sync work.
+- Only touch skills when explicitly requested.

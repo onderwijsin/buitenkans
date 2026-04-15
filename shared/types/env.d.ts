@@ -67,6 +67,11 @@ declare global {
 			GH_ORG: string
 
 			/**
+			 * Vercel AI Gateway
+			 */
+			AI_GATEWAY_API_KEY: string
+
+			/**
 			 * Sentry build/runtime configuration
 			 */
 			SENTRY_AUTH_TOKEN?: string

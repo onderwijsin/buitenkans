@@ -1,11 +1,18 @@
-# Context Knowledge
+# Context
 
-`context/` captures repository and domain knowledge agents need to execute safely.
+`context/` holds repository facts agents need before making changes.
 
 ## Files
 
-- TODO add file refs
+- `project-overview.md`
+- `content-and-routes.md`
+- `runtime-and-deployment.md`
 
-## Human Sources
+## Human Mirrors
 
-- TODO add file refs
+- `docs/README.md`
+- `docs/content/README.md`
+- `docs/server/README.md`
+- `docs/config/README.md`
+- `docs/ci-cd/README.md`
+- `docs/ai-integration/README.md`

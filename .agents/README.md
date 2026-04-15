@@ -1,33 +1,37 @@
 # Agent Knowledge Base
 
-Operational knowledge for coding agents in this repository.
+This directory contains agent-facing operational knowledge for this repository.
 
-## Contract
+Policy mirror:
 
 - `docs/` is for humans.
 - `.agents/` is for agents.
-- Active information must be maintained in both places.
-
-Human-side companion: `docs/agent-knowledge-sync.md`.
+- Active information must exist in both places.
 
 ## Structure
 
-- `skills/`: tooling knowledge and skill packs.
-- `context/`: domain and system knowledge.
-- `patterns/`: implementation style and execution playbooks.
-- `rules/`: hard constraints and policy.
+- `context/` project/runtime context for task orientation
+- `rules/` hard constraints and policy
+- `patterns/` execution playbooks
+- `skills/` installed skill packs
 
-## Read Order (Fast)
+## Important Rule
+
+Do not edit anything under `.agents/skills/**` unless explicitly requested.
+
+## Suggested Read Order
 
 1. `rules/operational-contract.md`
-2. `rules/documentation-sync.md`
-3. `skills/README.md`
+2. `context/project-overview.md`
+3. `context/content-and-routes.md`
+4. `context/runtime-and-deployment.md`
+5. `patterns/change-workflow.md`
+6. `rules/documentation-sync.md`
 
-## Source Mapping
+## Human Mirror Links
 
-- Human conventions: `docs/conventions.md`
-- Human agent playbook: `docs/agent-guide.md`
-- Human architecture: `docs/monorepo-setup.md`
-- Human testing: `docs/testing.md`
-
-When any mapped source changes, update the relevant `.agents/*` file in the same change.
+- `../README.md`
+- `../docs/README.md`
+- `../docs/conventions/README.md`
+- `../docs/content/README.md`
+- `../docs/ci-cd/README.md`
