@@ -98,3 +98,25 @@ index 5a5267dcacc1e3bb7225a6002f4cdac1dff88899..9f1230f1ce009d0db77b01eef425e413
  
        const i18nOptions = (nuxt.options as typeof nuxt.options & { i18n?: DocusI18nOptions }).i18n
  
+diff --git a/server/routes/sitemap.xml.ts b/server/routes/sitemap.xml.ts
+index 92978caba9589206229f6a91723ece256e2fb6d8..a73a5a21c5974e0b283ee8a332cb9213488be255 100644
+--- a/server/routes/sitemap.xml.ts
++++ b/server/routes/sitemap.xml.ts
+@@ -13,15 +13,8 @@ export default defineEventHandler(async (event) => {
+ 
+   const availableLocales = getAvailableLocales(config.public as Record<string, unknown>)
+   const collections = getCollectionsToQuery(undefined, availableLocales)
+-
+-  if (availableLocales.length > 0) {
+-    for (const locale of availableLocales) {
+-      collections.push(`landing_${locale}`)
+-    }
+-  }
+-  else {
+-    collections.push('landing')
+-  }
++  // Docus routing can disable landing collections when app/pages/index.vue exists.
++  // Query only docs collections here to avoid prerender failures on missing landing collections.
+ 
+   const urls: SitemapUrl[] = []
+ 
