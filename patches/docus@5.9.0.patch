@@ -60,7 +60,7 @@ index f72dff99fa71300e2fa10726523197fcc57158a5..1098e9a464ab4b4551ce04c4cf1375bd
    }
  }
 diff --git a/modules/assistant/runtime/server/api/search.ts b/modules/assistant/runtime/server/api/search.ts
-index 5b61d864f6414b79178cd25f9ffc9e5110dec62d..6ea71c59070c7604f6a807f6f31a37121d5d099d 100644
+index 5b61d864f6414b79178cd25f9ffc9e5110dec62d..85cf2137b317a387634fb6c63daf077d59ab6337 100644
 --- a/modules/assistant/runtime/server/api/search.ts
 +++ b/modules/assistant/runtime/server/api/search.ts
 @@ -4,6 +4,23 @@ import { createMCPClient } from '@ai-sdk/mcp'
@@ -80,7 +80,7 @@ index 5b61d864f6414b79178cd25f9ffc9e5110dec62d..6ea71c59070c7604f6a807f6f31a3712
 +      resolvedInput = url.slice(origin.length) || '/'
 +    }
 +
-+    return eventFetch(resolvedInput, { ...init, headers })
++    return eventFetch(resolvedInput, { ...init, headers: Object.fromEntries(headers.entries()) })
 +  }
 +}
 +
