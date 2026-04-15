@@ -49,13 +49,17 @@
 		"@types/node": "catalog:",
 		"@vueuse/core": "catalog:",
 		"@vueuse/nuxt": "catalog:",
+		"agents": "catalog:",
 		"better-sqlite3": "catalog:",
+		"class-variance-authority": "catalog:",
+		"clsx": "catalog:",
 		"defu": "catalog:",
 		"docus": "catalog:",
 		"eslint": "catalog:",
 		"eslint-config-prettier": "catalog:",
 		"eslint-plugin-jsdoc": "catalog:",
 		"husky": "catalog:",
+		"lucide-vue-next": "catalog:",
 		"motion-v": "catalog:",
 		"nuxt": "catalog:",
 		"nuxt-studio": "catalog:",
@@ -65,18 +69,12 @@
 		"prettier-plugin-tailwindcss": "catalog:",
 		"semantic-release": "catalog:",
 		"tailwindcss": "catalog:",
+		"tailwind-merge": "catalog:",
 		"tw-animate-css": "catalog:",
 		"typescript": "catalog:",
 		"ufo": "catalog:",
 		"vue-tsc": "catalog:",
 		"wrangler": "catalog:",
 		"zod": "catalog:"
-	},
-	"dependencies": {
-		"agents": "catalog:",
-		"class-variance-authority": "catalog:",
-		"clsx": "catalog:",
-		"lucide-vue-next": "catalog:",
-		"tailwind-merge": "catalog:"
 	}
 }
