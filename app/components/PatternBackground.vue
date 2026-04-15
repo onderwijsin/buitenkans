@@ -142,4 +142,10 @@ const durationFormSpeed = computed(() => `${props.speed}ms`)
 .move-bottom-left {
 	animation-name: to-bottom-left;
 }
+
+@media (prefers-reduced-motion: reduce) {
+	.move {
+		animation: none;
+	}
+}
 </style>

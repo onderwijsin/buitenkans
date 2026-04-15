@@ -30,6 +30,8 @@ Practical conventions for contributors.
 1. Use Nuxt auto-imports in runtime files.
 2. Keep route/page behavior colocated in `app/pages` and `app/layouts`.
 3. Reuse app/runtime config instead of scattering literals.
+4. `app/composables/tracking.ts` wraps Plausible event tracking with a privacy-aware guard
+   (`DISABLE_TRACKING` + client-only). Use `useTracking().trackEvent()` for analytics events.
 
 ## Content Conventions
 
