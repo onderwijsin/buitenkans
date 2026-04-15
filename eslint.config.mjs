@@ -9,6 +9,10 @@ import withNuxt from './.nuxt/eslint.config.mjs'
 
 export default withNuxt(
 	{
+		ignores: ['.agents/**', 'content/**', 'tmp/**', 'tmp.content/**']
+	},
+
+	{
 		rules: {
 			'vue/multi-word-component-names': 'off',
 			'no-unused-vars': [

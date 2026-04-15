@@ -40,28 +40,20 @@ const isDev = mode === 'dev'
 const sentryEnabled = process.env.SENTRY_ENABLED !== 'false'
 
 export default defineNuxtConfig({
+	extends: ['docus'],
 	modules: [
 		'@nuxt/eslint',
-		'@nuxt/ui',
-		'@nuxtjs/seo',
-		'@nuxt/image',
 		'@nuxtjs/plausible',
 		'@sentry/nuxt/module',
 		'@vueuse/nuxt',
 		'@nuxthub/core',
-		'@nuxt/content',
-		'nuxt-llms',
 		'nuxt-studio',
-		'@vueuse/nuxt'
+		'@vueuse/nuxt',
+		'@nuxt/fonts'
 	],
 
 	devtools: {
 		enabled: true
-	},
-
-	imports: {
-		// Auto-import pinia stores defined in `~/stores`
-		dirs: ['stores']
 	},
 
 	alias: {
@@ -77,15 +69,6 @@ export default defineNuxtConfig({
 
 	experimental: {
 		inlineRouteRules: true
-	},
-
-	// image: { provider: 'none' },
-	image: {
-		provider: 'cloudflare',
-		cloudflare: {
-			// During local development, we so to fetch images from the prod server!
-			baseURL: joinURL(process.env.PROD_URL ?? process.env.APP_URL!)
-		}
 	},
 
 	$development: {
@@ -204,13 +187,11 @@ export default defineNuxtConfig({
 		cache: true
 	},
 
-	content: {
-		build: {
-			markdown: {
-				toc: {
-					searchDepth: NUXT_BEHAVIOR_CONFIG.contentTocSearchDepth
-				}
-			}
+	image: {
+		provider: 'cloudflare',
+		cloudflare: {
+			// During local development, we so to fetch images from the prod server!
+			baseURL: joinURL(process.env.PROD_URL ?? process.env.APP_URL!)
 		}
 	},
 
@@ -300,10 +281,19 @@ export default defineNuxtConfig({
 	ui: {
 		theme: {
 			colors: ['primary', 'secondary', 'neutral', 'success', 'warning', 'error', 'info']
-		},
-		experimental: {
-			componentDetection: true
 		}
+		// experimental: {
+		// 	componentDetection: true
+		// }
+	},
+
+	assistant: {
+		// AI model (uses AI SDK Gateway format)
+		model: 'mistral/mistral-medium'
+	},
+
+	fonts: {
+		families: [{ name: 'Poppins', provider: 'google', weights: [200, 400, 500, 700] }]
 	},
 
 	plausible: {

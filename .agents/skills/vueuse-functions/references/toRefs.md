@@ -9,7 +9,7 @@ of an object.
 
 ## Usage
 
-<!-- eslint-disable array-bracket-spacing -->
+ 
 <!-- eslint-disable ts/no-redeclare -->
 
 ```ts

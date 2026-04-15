@@ -6,6 +6,11 @@
 			"sourceType": "github",
 			"computedHash": "27827bb6ca05cb6757953e507f46dc1c2bf44e48c1928eb3e49f2b675a168492"
 		},
+		"create-docs": {
+			"source": "docus.dev",
+			"sourceType": "well-known",
+			"computedHash": "3c6d7d6f6084ff5ebbd59fe8b348f99bced0d303da45cd61069a0f6dac8199f6"
+		},
 		"nuxt": {
 			"source": "antfu/skills",
 			"sourceType": "github",
@@ -25,6 +30,11 @@
 			"source": "antfu/skills",
 			"sourceType": "github",
 			"computedHash": "318f9fca2441a3e06fedc336e195dd18be5dbe901064e4fa71b76b40b096ab3a"
+		},
+		"review-docs": {
+			"source": "docus.dev",
+			"sourceType": "well-known",
+			"computedHash": "016eca30a60e4d1ec38cf162753d47e52dbb543a931f77f8050d4bc4f6bc5e6b"
 		},
 		"vitest": {
 			"source": "antfu/skills",

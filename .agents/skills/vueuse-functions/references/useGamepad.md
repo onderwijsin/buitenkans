@@ -74,7 +74,7 @@ onDisconnected((index) => {
 > [compatibility table](https://developer.mozilla.org/en-US/docs/Web/API/GamepadHapticActuator#browser_compatibility)
 > before using.
 
-<!-- eslint-disable import/first -->
+ 
 
 ```ts
 import { useGamepad } from '@vueuse/core'

@@ -1,33 +1,20 @@
 @import 'tailwindcss';
 @import '@nuxt/ui';
 
-@plugin '@tailwindcss/typography';
+@theme {
+	--font-sans: 'Poppins', sans-serif;
+	--ui-container: 90rem;
 
-@theme static {
-	--font-sans: 'Rijksoverheid', sans-serif;
-	--font-heading: 'Rijksoverheid Heading', sans-serif;
-
-	--color-primary-50: #fdf2f7;
-	--color-primary-100: #fbe6f0;
-	--color-primary-200: #f5cce1;
-	--color-primary-300: #ee99c3;
-	--color-primary-400: #e066a5;
-	--color-primary-500: #a90061;
-	--color-primary-600: #8e0052;
-	--color-primary-700: #740043;
-	--color-primary-800: #590033;
-	--color-primary-900: #400024;
-	--color-primary-950: #260015;
-
-	--color-secondary-50: #f0f7fd;
-	--color-secondary-100: #e0effa;
-	--color-secondary-200: #c2dff5;
-	--color-secondary-300: #91c7ec;
-	--color-secondary-400: #5faee3;
-	--color-secondary-500: #007bc7;
-	--color-secondary-600: #0067a7;
-	--color-secondary-700: #005287;
-	--color-secondary-800: #003e66;
-	--color-secondary-900: #002a45;
-	--color-secondary-950: #00172a;
+	--color-orange-25: oklch(97.4% 0.015 54.9);
+	--color-orange-50: oklch(94.8% 0.029 50.6);
+	--color-orange-100: oklch(89.8% 0.059 50.2);
+	--color-orange-200: oklch(85% 0.09 49.7);
+	--color-orange-300: oklch(80.5% 0.122 49);
+	--color-orange-400: oklch(76.5% 0.152 48.4);
+	--color-orange-500: oklch(70.8% 0.14 48.2);
+	--color-orange-600: oklch(64.7% 0.128 48.3);
+	--color-orange-700: oklch(58.9% 0.115 48.5);
+	--color-orange-800: oklch(52.6% 0.101 48.1);
+	--color-orange-900: oklch(46.4% 0.087 48.9);
+	--color-orange-950: oklch(39.7% 0.072 48.3);
 }
