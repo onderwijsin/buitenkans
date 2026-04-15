@@ -186,22 +186,6 @@ patchedDependencies:
 importers:
 
   .:
-    dependencies:
-      agents:
-        specifier: 'catalog:'
-        version: 0.11.0(@babel/core@7.29.0)(@babel/runtime@7.29.2)(@cloudflare/workers-types@4.20260414.1)(ai@6.0.159(zod@4.3.6))(react@19.2.5)(rolldown@1.0.0-rc.15)(vite@7.3.2(@types/node@25.5.2)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))(zod@4.3.6)
-      class-variance-authority:
-        specifier: 'catalog:'
-        version: 0.7.1
-      clsx:
-        specifier: 'catalog:'
-        version: 2.1.1
-      lucide-vue-next:
-        specifier: 'catalog:'
-        version: 1.0.0(vue@3.5.32(typescript@5.9.3))
-      tailwind-merge:
-        specifier: 'catalog:'
-        version: 3.5.0
     devDependencies:
       '@commitlint/cli':
         specifier: 'catalog:'
@@ -293,9 +277,18 @@ importers:
       '@vueuse/nuxt':
         specifier: 'catalog:'
         version: 14.2.1(magicast@0.5.2)(nuxt@4.4.2(@babel/core@7.29.0)(@babel/plugin-proposal-decorators@7.29.0(@babel/core@7.29.0))(@babel/plugin-syntax-jsx@7.28.6(@babel/core@7.29.0))(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@parcel/watcher@2.5.6)(@types/node@25.5.2)(@vue/compiler-sfc@3.5.32)(better-sqlite3@12.8.0)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.8.0))(eslint@9.39.2(jiti@2.6.1))(ioredis@5.10.1)(lightningcss@1.32.0)(magicast@0.5.2)(meow@13.2.0)(optionator@0.9.4)(rolldown@1.0.0-rc.15)(rollup-plugin-visualizer@7.0.1(rolldown@1.0.0-rc.15)(rollup@4.60.1))(rollup@4.60.1)(srvx@0.11.15)(terser@5.46.1)(typescript@5.9.3)(vite@7.3.2(@types/node@25.5.2)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))(vue-tsc@3.2.6(typescript@5.9.3))(yaml@2.8.3))(vue@3.5.32(typescript@5.9.3))
+      agents:
+        specifier: 'catalog:'
+        version: 0.11.0(@babel/core@7.29.0)(@babel/runtime@7.29.2)(@cloudflare/workers-types@4.20260414.1)(ai@6.0.159(zod@4.3.6))(react@19.2.5)(rolldown@1.0.0-rc.15)(vite@7.3.2(@types/node@25.5.2)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.1)(yaml@2.8.3))(zod@4.3.6)
       better-sqlite3:
         specifier: 'catalog:'
         version: 12.8.0
+      class-variance-authority:
+        specifier: 'catalog:'
+        version: 0.7.1
+      clsx:
+        specifier: 'catalog:'
+        version: 2.1.1
       defu:
         specifier: 'catalog:'
         version: 6.1.7
@@ -314,6 +307,9 @@ importers:
       husky:
         specifier: 'catalog:'
         version: 9.1.7
+      lucide-vue-next:
+        specifier: 'catalog:'
+        version: 1.0.0(vue@3.5.32(typescript@5.9.3))
       motion-v:
         specifier: 'catalog:'
         version: 2.2.1(@vueuse/core@14.2.1(vue@3.5.32(typescript@5.9.3)))(react@19.2.5)(vue@3.5.32(typescript@5.9.3))
@@ -338,6 +334,9 @@ importers:
       semantic-release:
         specifier: 'catalog:'
         version: 25.0.3(typescript@5.9.3)
+      tailwind-merge:
+        specifier: 'catalog:'
+        version: 3.5.0
       tailwindcss:
         specifier: 'catalog:'
         version: 4.2.2
