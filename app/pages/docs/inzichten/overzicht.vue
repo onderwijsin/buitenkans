@@ -65,7 +65,8 @@ watch(
 defineOgImage('Docs' as keyof OgImageComponents, {
 	headline: headline.value,
 	title: title?.slice(0, 60),
-	description: formatOgDescription(title, description)
+	description: formatOgDescription(title, description),
+	fontFamily: 'Poppins'
 })
 
 // Add the page path to the prerender list

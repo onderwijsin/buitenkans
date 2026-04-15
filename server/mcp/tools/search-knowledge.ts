@@ -1,5 +1,3 @@
-import type { Collections } from '@nuxt/content'
-
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 
@@ -93,7 +91,7 @@ OUTPUT:
 		const results: KnowledgeResult[] = []
 
 		if (requestedTypes.includes('docs')) {
-			const docs = await queryCollection(event, 'docs' as keyof Collections)
+			const docs = await queryCollection(event, 'docs')
 				.select('title', 'description', 'path')
 				.where('extension', '=', 'md')
 				.where('path', 'NOT LIKE', '%/.navigation')
@@ -126,7 +124,7 @@ OUTPUT:
 		}
 
 		if (requestedTypes.includes('faqs')) {
-			const faqs = await queryCollection(event, 'faqs' as keyof Collections)
+			const faqs = await queryCollection(event, 'faqs')
 				.select('title', 'description', 'path')
 				.all()
 
@@ -152,7 +150,7 @@ OUTPUT:
 		}
 
 		if (requestedTypes.includes('people')) {
-			const people = await queryCollection(event, 'people' as keyof Collections)
+			const people = await queryCollection(event, 'people')
 				.select('name', 'job', 'employer')
 				.all()
 

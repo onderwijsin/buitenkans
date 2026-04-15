@@ -245,6 +245,7 @@ export default defineNuxtConfig({
 
 	runtimeConfig: {
 		apiToken: process.env.API_TOKEN,
+		aiGatewayApiKey: process.env.AI_GATEWAY_API_KEY,
 		cloudflare: {
 			accountId: process.env.CLOUDFLARE_ACCOUNT_ID,
 			apiToken: process.env.CLOUDFLARE_API_TOKEN,
@@ -357,5 +358,15 @@ export default defineNuxtConfig({
 				contentCollection: 'faqs'
 			}
 		]
+	},
+
+	content: {
+		// Avoid stale/empty `.data/content/contents.sqlite` between `prepare`/`typecheck` and `dev`.
+		// Nuxt Content uses `_localDatabase` for dev/prerender, while production still uses the
+		// runtime database adapter selected by the deployment preset (D1 on Cloudflare here).
+		_localDatabase: {
+			type: 'sqlite',
+			filename: '.data/:memory:'
+		}
 	}
 })

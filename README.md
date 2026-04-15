@@ -1,4 +1,4 @@
-![Buitenkans handreiking](./public/Regional%20Site%20Menu%20Interactive%20App.png)
+![Buitenkans handreiking](./public/onderwijsin_banner.png)
 
 <p>
   <a href="https://nuxt.com/"><img src="https://img.shields.io/badge/Nuxt-4-28CF8D?logo=nuxt.js&logoColor=white" alt="Nuxt"></a>

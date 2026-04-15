@@ -12,12 +12,30 @@
   - `pnpm-workspace.yaml` patched dependency entry for `docus@5.9.0`
   - removal trigger tracked in `.agents/context/i18n-patches.md`
 
+## Typecheck Compatibility
+
+- Active Docus patch (`patches/docus@5.9.0.patch`) also contains Docus typecheck compatibility fixes
+  for Nuxt 4 tooling.
+- Temporary schema shim:
+  - `shared/types/docus-types-compat.d.ts`
+- Removal criteria:
+  - remove shim when upstream Docus/Nuxt type compatibility is fixed and `pnpm typecheck` passes
+    without local compatibility declarations.
+- `app/app.config.ts` uses a `uiConfig` variable (instead of inline literal typing casts) to keep
+  custom UI keys accepted without `any` in app code.
+- `app/app.config.ts` must keep `github` runtime-disabled (`false`) so Docus does not render GitHub
+  actions; a typed boundary cast is used to bridge current schema typing mismatch.
+
 ## UI Runtime
 
 - Core UI: Nuxt UI
 - Single local Inspira/shadcn-style component: `app/components/PatternBackground.vue` +
   `app/composables/pattern-background.ts`
 - shadcn-style config: `components.json`
+- OG image templates are locally overridden:
+  - `app/components/OgImage/Docs.takumi.vue`
+  - `app/components/OgImage/Landing.takumi.vue`
+  - both force `font-family: 'Poppins', sans-serif`
 
 ## Cloudflare Bindings
 
@@ -51,6 +69,17 @@ Automation:
   - `recommend-insights`
   - `list-faqs`
 - no custom `/api/ai/*` feature set currently present
+
+## OG Font Guardrails
+
+- `@nuxt/fonts` provides `Poppins` with `global: true` in `nuxt.config.ts`.
+- Docus base OG generation requires explicit `fontFamily` to avoid fallback font rendering.
+- Active implementation:
+  - custom pages call `defineOgImage(..., { fontFamily: 'Poppins' })`
+  - `patches/docus@5.9.0.patch` injects `fontFamily: 'Poppins'` into Docus docs/landing OG calls
+- Removal criteria:
+  - only remove Docus patch lines when upstream Docus supports a stable OG font config route or no
+    longer needs explicit family to use configured project fonts.
 
 ## Testing State
 

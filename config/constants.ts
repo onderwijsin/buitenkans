@@ -32,7 +32,7 @@ export const NUXT_BEHAVIOR_CONFIG = {
 	/** Explicit prerender entry routes for static generation. */
 	nitroPrerenderRoutes: ['/'],
 	/** Max CPU budget (ms) for Cloudflare worker requests. */
-	nitroCpuMs: 30000,
+	nitroCpuMs: 300000,
 	/** TOC depth used by Nuxt Content markdown build step. */
 	contentTocSearchDepth: 2,
 	/** Separator used in generated document/page titles. */
