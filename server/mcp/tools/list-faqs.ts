@@ -1,5 +1,3 @@
-import type { Collections } from '@nuxt/content'
-
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 
@@ -79,7 +77,7 @@ WHEN TO USE:
 		const event = useEvent()
 		const siteUrl = getRequestURL(event).origin
 
-		const faqs = await queryCollection(event, 'faqs' as keyof Collections)
+		const faqs = await queryCollection(event, 'faqs')
 			.select('title', 'description', 'path')
 			.all()
 

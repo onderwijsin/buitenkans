@@ -1,11 +1,15 @@
 import { queryCollection } from '@nuxt/content/server'
 
 /**
- * Returns all markdown-backed `extras` collection entries.
+ * Returns docs pages from the `duik-dieper` section.
  *
  * @param event - H3 request event.
- * @returns Extra resources from Nuxt Content.
+ * @returns Deep-dive resources from Nuxt Content.
  */
 export default defineEventHandler((event) => {
-	return queryCollection(event, 'resources').where('extension', '=', 'md').all()
+	return queryCollection(event, 'docs')
+		.where('extension', '=', 'md')
+		.where('path', 'LIKE', '/docs/duik-dieper/%')
+		.where('path', 'NOT LIKE', '%/.navigation')
+		.all()
 })

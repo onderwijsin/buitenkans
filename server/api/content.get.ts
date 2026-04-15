@@ -1,11 +1,14 @@
 import { queryCollection } from '@nuxt/content/server'
 
 /**
- * Returns all markdown-backed `items` collection entries.
+ * Returns all markdown docs pages.
  *
  * @param event - H3 request event.
- * @returns Content items from Nuxt Content.
+ * @returns Docs pages from Nuxt Content.
  */
 export default defineEventHandler((event) => {
-	return queryCollection(event, 'items').where('extension', '=', 'md').all()
+	return queryCollection(event, 'docs')
+		.where('extension', '=', 'md')
+		.where('path', 'NOT LIKE', '%/.navigation')
+		.all()
 })

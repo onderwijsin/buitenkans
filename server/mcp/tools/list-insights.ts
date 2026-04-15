@@ -1,5 +1,3 @@
-import type { Collections } from '@nuxt/content'
-
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 
@@ -28,7 +26,7 @@ WHEN TO USE:
 		const event = useEvent()
 		const siteUrl = getRequestURL(event).origin
 
-		const insights = await queryCollection(event, 'docs' as keyof Collections)
+		const insights = await queryCollection(event, 'docs')
 			.select('title', 'description', 'path', 'stem')
 			.where('extension', '=', 'md')
 			.where('stem', 'LIKE', '%1.inzichten%')

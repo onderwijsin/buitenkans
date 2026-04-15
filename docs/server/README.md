@@ -43,10 +43,13 @@ Serves media from `hub:blob` (R2 binding) and prepends `/assets/` to Studio-uplo
 
 ### `GET /api/content` and `GET /api/resources`
 
-These routes query markdown collections named `items` and `resources`.
+Both routes query the `docs` collection:
 
-If these routes are used in your deployment flow, keep route collection names and content collection
-configuration aligned.
+- `/api/content` returns all markdown docs pages (excluding `.navigation` docs files).
+- `/api/resources` returns markdown docs pages under `/docs/duik-dieper/**` (excluding `.navigation`
+  docs files).
+
+If you change route purpose, keep query filters aligned with `content.config.ts` collections.
 
 ### `GET /raw/docs/**.md` (dynamic override subset)
 

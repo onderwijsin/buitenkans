@@ -42,5 +42,7 @@ Active files:
 - `server/routes/raw/docs/duik-dieper/veelgestelde-vragen.md.get.ts`
 - `server/routes/raw/docs/duik-dieper/klankbordgroep.md.get.ts`
 
-`content.get.ts` and `resources.get.ts` query collections named `items` and `resources`. Keep these
-route collection names aligned with content collection configuration when using them.
+`content.get.ts` and `resources.get.ts` both query the `docs` collection:
+
+- `content.get.ts`: all markdown docs pages except `.navigation`.
+- `resources.get.ts`: markdown docs pages under `/docs/duik-dieper/**` except `.navigation`.

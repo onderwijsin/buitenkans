@@ -25,12 +25,27 @@ config.
   - shadcn-vue style component config used for the local Inspira-style component setup
 - [`./docus-nl-locale-patch.md`](./docus-nl-locale-patch.md)
   - temporary Dutch locale patch for Docus via `pnpm patch` (remove after upstream merge)
+- [`../../patches/docus@5.9.0.patch`](../../patches/docus@5.9.0.patch)
+  - active `pnpm patch` with Docus typecheck compatibility fixes
+- [`../../shared/types/docus-types-compat.d.ts`](../../shared/types/docus-types-compat.d.ts)
+  - temporary Nuxt schema compatibility shim for `RuntimeConfig` typing
 
 ## Runtime Notes
 
 - Keep secrets in environment variables and `runtimeConfig`.
 - Avoid hardcoding secrets in `config/*` or app source files.
 - Treat `MODE` as the source for environment behavior (`dev`, `preview`, `prod`).
+
+## Typecheck Compatibility Notes
+
+- Current stack (`Nuxt 4` + `Docus 5.9`) needs a temporary compatibility shim in
+  `shared/types/docus-types-compat.d.ts` to avoid false-positive `RuntimeConfig` typing failures.
+- Keep this shim narrow and typed (no broad `any` usage in app source).
+- App config UI overrides in `app/app.config.ts` are assigned through a variable (`uiConfig`) to
+  avoid excess-property type errors from generated schema narrowing.
+- `app/app.config.ts` intentionally keeps `github: false` at runtime to disable Docus GitHub UI
+  affordances; a boundary cast is used only to satisfy current generated app-config typing.
+- Remove the shim once upstream Docus/Nuxt typing is fixed and `pnpm typecheck` passes without it.
 
 ## Cloudflare-Specific Knobs
 

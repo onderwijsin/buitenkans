@@ -1,8 +1,53 @@
+/**
+ * Keep UI overrides in a variable instead of an inline literal.
+ *
+ * Why:
+ * - Nuxt-generated app config types can be narrower than what Docus/Nuxt UI accepts at runtime.
+ * - Defining this object separately avoids fragile excess-property checks in `defineAppConfig(...)`.
+ */
+const uiConfig = {
+	colors: {
+		primary: 'orange'
+	},
+	pageHero: {
+		slots: {
+			title: 'text-3xl sm:text-4xl md:text-6xl lg:text-5xl'
+		}
+	},
+	page: {
+		slots: {
+			center: 'lg:col-span-7',
+			right: 'lg:col-span-3'
+		}
+	},
+	pageHeader: {
+		slots: {
+			wrapper: 'lg:flex-nowrap lg:items-start'
+		}
+	},
+	contentToc: {
+		slots: {
+			root: 'bg-default/75 backdrop-blur lg:bg-transparent lg:backdrop-blur-none'
+		}
+	}
+}
+
 export default defineAppConfig({
 	docus: {
 		locale: 'nl'
 	},
-	github: false,
+
+	/**
+	 * Must stay `false` at runtime.
+	 *
+	 * Why:
+	 * - Docus app components use a truthy check for `appConfig.github` to decide whether to render
+	 *   GitHub links/actions.
+	 * - This project intentionally disables all GitHub UI affordances.
+	 * - Current generated AppConfig typing expects an object shape, so we bridge that mismatch with a
+	 *   boundary cast while preserving the runtime boolean value.
+	 */
+	github: false as unknown as { url?: string; branch?: string; rootDir?: string },
 	assistant: {
 		faqQuestions: [
 			{
@@ -72,30 +117,5 @@ export default defineAppConfig({
 			]
 		}
 	},
-	ui: {
-		colors: {
-			primary: 'orange'
-		},
-		pageHero: {
-			slots: {
-				title: 'text-3xl sm:text-4xl md:text-6xl lg:text-5xl'
-			}
-		},
-		page: {
-			slots: {
-				center: 'lg:col-span-7',
-				right: 'lg:col-span-3'
-			}
-		},
-		pageHeader: {
-			slots: {
-				wrapper: 'lg:flex-nowrap lg:items-start'
-			}
-		},
-		contentToc: {
-			slots: {
-				root: 'bg-default/75 backdrop-blur lg:bg-transparent lg:backdrop-blur-none'
-			}
-		}
-	}
+	ui: uiConfig
 })

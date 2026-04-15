@@ -151,6 +151,7 @@ function getSystemPrompt(siteName: string) {
  * Create a Cloudflare-safe fetch wrapper.
  * - Forces correct Accept header for SSE
  * - Ensures correct `this` binding
+ * @returns A fetch-compatible function with required MCP SSE headers.
  */
 function createSafeFetch(): typeof fetch {
 	const boundFetch = fetch.bind(globalThis)
