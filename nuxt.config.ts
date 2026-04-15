@@ -196,6 +196,7 @@ export default defineNuxtConfig({
 	},
 
 	studio: {
+		dev: false,
 		route: '/studio',
 		i18n: {
 			defaultLocale: 'nl'
@@ -318,30 +319,32 @@ export default defineNuxtConfig({
 		trailingSlash: false
 	},
 
-	// TODO fix llm config
 	llms: {
 		domain: process.env.APP_URL,
+
 		title: siteTitle,
+
 		description:
-			"Een interactieve tool en gids voor het ontwerpen, evalueren en verbeteren van websites van regionale onderwijsloket. Het doel van de tool is om regionale onderwijsloketten nóg beter in de behoefte van hun doelgroepen te laten voorzien. De tool biedt regio's inspiratie en handige voorbeelden, concrete auditing tools en instrumenten om rapportages en breifing te genereren. De kern van de tool is de menukaart: deze biedt een overzicht van alle verschillende elementen die de website van een regionaal onderwijsloket zou moeten bevatten.",
+			'Praktische handreiking voor het ontwerpen, opzetten en verbeteren van trajecten voor zij-instroom van schoolleiders in het primair onderwijs. Gebaseerd op inzichten uit het project Buitenkans.',
+
 		full: {
-			title: 'Volledige documentatie',
+			title: 'Volledige documentatie Buitenkans',
 			description:
-				'Alle inhoud van de tool voor het ontwerpen, evalueren en verbeteren van websites van regionale onderwijsloket, gebundeld in één document.'
+				'Deze documentatie bundelt alle inzichten, succesfactoren en ontwerpprincipes uit het project Buitenkans. Gericht op schoolbestuurders en programmamakers die werken aan instroomroutes voor schoolleiders van buiten het onderwijs.'
 		},
 
 		sections: [
 			{
-				title: 'Menukaart items',
+				title: 'Inzichten',
 				description:
-					'De verschillende elementen die de website van een regionaal onderwijsloket zou kunnen bevatten.',
+					'Kerninzichten en succesfactoren voor het werven, selecteren, ontwikkelen en behouden van schoolleiders. Inclusief concrete aanbevelingen voor bestuurders en opleiders.',
 				contentCollection: 'items'
 			},
 			{
-				title: "Extra's voor de website",
+				title: 'Bronnen, voorbeelden en andere hulpmiddelen',
 				description:
-					'Handige resources, tools en content die je gratis in kunt zetten voor de website van een regionaal onderwijsloket.',
-				contentCollection: 'extras'
+					'Praktische tools, formats, voorbeeldtrajecten en achtergrondbronnen die helpen bij het ontwerpen en implementeren van regionale of bestuurlijke programma’s voor schoolleiderschap.',
+				contentCollection: 'resources'
 			}
 		]
 	}
