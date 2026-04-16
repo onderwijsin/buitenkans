@@ -54,6 +54,15 @@ Keep these stable unless a coordinated schema + UI change is requested.
 
 These pages are implemented in `app/pages/docs/**`.
 
+Shared implementation details for these three page overrides:
+
+- `app/composables/useDocsOverridePage.ts`
+  - shared page bootstrap (docs page fetch, SEO, OG image, headline/breadcrumbs, raw prerender path)
+- `app/components/DocsOverridePage.vue`
+  - shared Docus page shell (`UPage`, `UPageHeader`, links slot, right-column suppression)
+
+Each page now only contains its route-specific collection query and body rendering.
+
 ## Raw Markdown For AI/Agents
 
 Nuxt LLMs exposes `/raw/:path.md` for docs pages.

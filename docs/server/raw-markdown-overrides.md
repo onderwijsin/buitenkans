@@ -17,6 +17,13 @@ pages that assemble data from collections:
 
 Without overrides, raw output returns placeholder markdown text and diverges from frontend content.
 
+Frontend implementation note:
+
+- these three Vue routes share `app/composables/useDocsOverridePage.ts` and
+  `app/components/DocsOverridePage.vue` for common docs-page bootstrap/shell behavior
+- route-specific collection rendering still lives in each page file, and raw handlers must stay in
+  sync with that route-specific data logic
+
 ## Current Override Routes
 
 - `server/routes/raw/docs/inzichten/overzicht.md.get.ts`

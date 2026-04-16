@@ -16,6 +16,13 @@ Docus docs pages come from `content/docs/**`.
 - `/docs/duik-dieper/veelgestelde-vragen` -> FAQ collection list
 - `/docs/duik-dieper/klankbordgroep` -> people collection list
 
+Shared override-page abstractions:
+
+- `app/composables/useDocsOverridePage.ts`
+  - shared docs page loading + SEO/OG + headline/breadcrumbs + raw prerender registration
+- `app/components/DocsOverridePage.vue`
+  - shared page shell/header-links pattern used by the three custom docs routes
+
 ## Raw Markdown Overrides
 
 `nuxt-llms` provides `/raw/:path.md`, but these three dynamic pages are overridden so markdown

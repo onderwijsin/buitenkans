@@ -15,6 +15,9 @@ can become placeholder text and drift from frontend behavior.
 - `server/routes/raw/docs/duik-dieper/klankbordgroep.md.get.ts`
 - `server/routes/raw/docs/duik-dieper/veelgestelde-vragen.md.get.ts`
 - shared helper: `server/utils/raw-markdown.ts`
+- shared frontend docs-page abstractions:
+  - `app/composables/useDocsOverridePage.ts`
+  - `app/components/DocsOverridePage.vue`
 
 ## When To Add A New Override
 
