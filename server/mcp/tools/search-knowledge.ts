@@ -1,14 +1,24 @@
 /**
  * File overview:
  * - Registers MCP tool `search-knowledge`.
- * - Provides one cross-collection search entrypoint over `docs`, `faqs`, and `people`.
+ * - Provides one cross-collection search entrypoint over `docs`, `faqs`, `people`, and `assistantFacts`.
  * - Uses lightweight keyword scoring to return ranked matches with stable page URLs.
  * - Intended as the assistant's broad discovery tool before reading specific pages.
  */
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 
-const knowledgeTypes = ['docs', 'faqs', 'people'] as const
+const knowledgeTypes = ['docs', 'faqs', 'people', 'assistantFacts'] as const
+const faqCategories = [
+	'algemeen',
+	'strategie',
+	'ontwerp',
+	'start',
+	'uitvoering',
+	'succesfactoren',
+	'behoud'
+] as const
+const faqAudiences = ['bestuurders', 'programmamakers'] as const
 
 const normalizeText = (value: string) =>
 	value
@@ -50,10 +60,11 @@ const scoreText = (
 }
 
 export default defineMcpTool({
-	description: `Searches across docs pages, FAQ entries, and klankbordgroep people records in one call.
+	description: `Searches across docs pages, FAQ entries, klankbordgroep people records, and assistant-only guidance facts in one call.
 
 WHEN TO USE:
 - User asks a broad question and you don't know if the answer sits in docs, FAQ, or people.
+- User asks configuration questions about the assistant itself.
 - You need a quick shortlist of relevant sources before calling get-page.
 - User asks practical questions ("hoe werkt dit", "wie doet mee", "welke inzichten").
 
@@ -71,20 +82,34 @@ OUTPUT:
 		types: z
 			.array(z.enum(knowledgeTypes))
 			.optional()
-			.describe('Optional subset of sources to search: docs, faqs, people')
+			.describe('Optional subset of sources to search: docs, faqs, people, assistantFacts'),
+		faqCategories: z
+			.array(z.enum(faqCategories))
+			.optional()
+			.describe('Optional FAQ category filters (applied only when searching faqs)'),
+		faqAudiences: z
+			.array(z.enum(faqAudiences))
+			.optional()
+			.describe('Optional FAQ audience filters (applied only when searching faqs)'),
+		faqTags: z
+			.array(z.string().min(1))
+			.optional()
+			.describe('Optional FAQ tag filters (applied only when searching faqs)')
 	},
 	inputExamples: [
 		{ query: 'selectie van kandidaten', limit: 8 },
-		{ query: 'klankbordgroep', types: ['people'] }
+		{ query: 'klankbordgroep', types: ['people'] },
+		{ query: 'begeleiding', types: ['faqs'], faqCategories: ['behoud'] }
 	],
 	cache: '10m',
-	handler: async ({ query, limit, types }) => {
+	handler: async ({ query, limit, types, faqCategories, faqAudiences, faqTags }) => {
 		const event = useEvent()
 		const siteUrl = getRequestURL(event).origin
 
 		const normalizedQuery = normalizeText(query)
 		const tokens = tokenize(query)
 		const requestedTypes = types?.length ? types : knowledgeTypes
+		const normalizedFaqTagFilters = (faqTags || []).map((tag) => normalizeText(tag))
 
 		type KnowledgeResult = {
 			type: (typeof knowledgeTypes)[number]
@@ -93,6 +118,13 @@ OUTPUT:
 			path: string
 			url: string
 			score: number
+			faqMeta?: {
+				category: string | null
+				audience: string[]
+				tags: string[]
+				related: string[]
+				relatedUrls: string[]
+			}
 		}
 
 		const results: KnowledgeResult[] = []
@@ -132,14 +164,38 @@ OUTPUT:
 
 		if (requestedTypes.includes('faqs')) {
 			const faqs = await queryCollection(event, 'faqs')
-				.select('title', 'description', 'path')
+				.select('title', 'description', 'path', 'category', 'audience', 'tags', 'related')
 				.all()
 
 			for (const faq of faqs) {
+				if (
+					faqCategories?.length &&
+					(!faq.category || !faqCategories.includes(faq.category))
+				) {
+					continue
+				}
+
+				if (faqAudiences?.length) {
+					const faqAudienceValues = faq.audience || []
+					if (!faqAudienceValues.some((audience) => faqAudiences.includes(audience))) {
+						continue
+					}
+				}
+
+				if (normalizedFaqTagFilters.length) {
+					const faqTagValues = (faq.tags || []).map((tag) => normalizeText(tag))
+					if (!faqTagValues.some((tag) => normalizedFaqTagFilters.includes(tag))) {
+						continue
+					}
+				}
+
 				const path = faq.path || '/docs/duik-dieper/veelgestelde-vragen'
 				const score =
 					scoreText(normalizedQuery, tokens, faq.title || '', 65, 10) +
-					scoreText(normalizedQuery, tokens, faq.description || '', 40, 6)
+					scoreText(normalizedQuery, tokens, faq.description || '', 40, 6) +
+					scoreText(normalizedQuery, tokens, faq.category || '', 25, 5) +
+					scoreText(normalizedQuery, tokens, (faq.audience || []).join(' '), 24, 5) +
+					scoreText(normalizedQuery, tokens, (faq.tags || []).join(' '), 32, 6)
 
 				if (score <= 0) {
 					continue
@@ -151,6 +207,15 @@ OUTPUT:
 					summary: faq.description || '',
 					path,
 					url: `${siteUrl}${path}`,
+					faqMeta: {
+						category: faq.category || null,
+						audience: faq.audience || [],
+						tags: faq.tags || [],
+						related: faq.related || [],
+						relatedUrls: (faq.related || []).map(
+							(relatedPath) => `${siteUrl}${relatedPath}`
+						)
+					},
 					score
 				})
 			}
@@ -183,12 +248,46 @@ OUTPUT:
 			}
 		}
 
+		if (requestedTypes.includes('assistantFacts')) {
+			const facts = await queryCollection(event, 'assistantFacts')
+				.select('key', 'title', 'summary', 'guidance', 'aliases', 'tags', 'priority')
+				.all()
+
+			for (const fact of facts) {
+				const score =
+					scoreText(normalizedQuery, tokens, fact.title || '', 70, 10) +
+					scoreText(normalizedQuery, tokens, fact.summary || '', 40, 6) +
+					scoreText(normalizedQuery, tokens, fact.guidance || '', 50, 8) +
+					scoreText(normalizedQuery, tokens, (fact.aliases || []).join(' '), 65, 10) +
+					scoreText(normalizedQuery, tokens, (fact.tags || []).join(' '), 30, 5)
+
+				if (score <= 0) {
+					continue
+				}
+
+				results.push({
+					type: 'assistantFacts',
+					title: fact.title || fact.key || 'Assistant fact',
+					summary: fact.summary || '',
+					path: `assistant-facts:${fact.key || 'unknown'}`,
+					url: `assistant-facts:${fact.key || 'unknown'}`,
+					score: score + (fact.priority || 3) * 2
+				})
+			}
+		}
+
 		const ranked = results
 			.sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
 			.slice(0, limit)
 
 		return {
 			query,
+			filters: {
+				types: requestedTypes,
+				faqCategories: faqCategories || [],
+				faqAudiences: faqAudiences || [],
+				faqTags: faqTags || []
+			},
 			total: ranked.length,
 			results: ranked
 		}

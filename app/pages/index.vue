@@ -127,11 +127,12 @@ function insightImageWidth(index: number) {
 </script>
 
 <template>
-	<div class="overflow-x-clip">
+	<div>
 		<UPageHero
 			:ui="{
-				container: 'pb-0 sm:pb-0 md:pb-0 lg:pb-0',
-				title: 'leading-snug text-pretty'
+				container: 'pb-0 py-16 sm:py-20 lg:pb-24 lg:pt-30',
+				title: 'leading-snug text-pretty',
+				headline: 'space-y-2 space-x-2'
 			}"
 		>
 			<template #headline>
@@ -141,7 +142,16 @@ function insightImageWidth(index: number) {
 					to="https://onderwijsin.nl"
 					variant="outline"
 				>
-					Ontdek Onderwijs in →
+					Ontdek Onderwijs in
+				</UButton>
+				<UButton
+					icon="lucide:sparkles"
+					size="sm"
+					to="https://regioon.nl"
+					variant="outline"
+					color="neutral"
+				>
+					Ontdek Regio Oost Nederland
 				</UButton>
 			</template>
 			<template #title>
@@ -175,14 +185,18 @@ function insightImageWidth(index: number) {
 			</template>
 		</UPageHero>
 
+		<LandingReveal direction="up" :delay-ms="50">
+			<LogoCloud />
+		</LandingReveal>
+
 		<!-- SECTION -->
-		<UPageSection>
+		<UPageSection :ui="{ container: 'sm:pt-24 lg:py-24' }">
 			<UPageGrid class="lg:grid-cols-6">
 				<!-- CARD 1 -->
 				<LandingReveal
 					class="group col-span-1 sm:col-span-2"
 					direction="left"
-					:delay-ms="40"
+					:delay-ms="150"
 				>
 					<UPageCard class="h-full" spotlight>
 						<template #title>
@@ -212,7 +226,7 @@ function insightImageWidth(index: number) {
 				<LandingReveal
 					class="col-span-1 sm:col-span-2 lg:col-span-4"
 					direction="right"
-					:delay-ms="80"
+					:delay-ms="300"
 				>
 					<UPageCard
 						class="h-full"
@@ -282,9 +296,11 @@ function insightImageWidth(index: number) {
 						class="h-full"
 						variant="subtle"
 						title="Aan de slag!"
-						description="Ontdek alle inzichten, lessen, handige tips en tools die Buitenkans heeft opgeleverd."
+						description="De druk op schoolleiderschap neemt toe — en traditionele routes zijn niet genoeg. Buitenkans laat zien hoe je nieuwe routes ontwerpt én succesvol uitvoert."
 					>
-						<div class="mx-auto flex w-full max-w-xs flex-col gap-3 text-center">
+						<div
+							class="mt-auto flex w-full flex-col gap-3 text-center sm:max-w-xs lg:max-w-full"
+						>
 							<UButton
 								block
 								color="primary"
@@ -321,7 +337,10 @@ function insightImageWidth(index: number) {
 						title="Een handreiking van het veld"
 						description="Deze handreiking is ontwikkeld dóór en met het werkveld: een samenwerking tussen Onderwijsregio Oost-Nederland, Stichting Onderwijs in, hogescholen en landelijke partners."
 					>
-						<LogoCloud />
+						<NuxtImg
+							src="bijeenkomst.jpg"
+							class="w-full overflow-hidden rounded-lg dark:opacity-70"
+						/>
 					</UPageCard>
 				</LandingReveal>
 

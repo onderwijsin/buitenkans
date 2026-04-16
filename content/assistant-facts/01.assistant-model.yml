@@ -1,0 +1,17 @@
+key: assistant-model
+title: Active assistant model for this project
+summary: The built-in Docus assistant is configured to use Mistral Medium.
+guidance: >
+  If asked which model is used in this project, answer exactly: "mistral/mistral-medium".
+  Do not claim GPT-4 unless configuration was changed and verified in nuxt.config.ts.
+aliases:
+  - model
+  - ai model
+  - assistant model
+  - llm
+  - mistral
+tags:
+  - assistant
+  - model
+  - configuration
+priority: 5

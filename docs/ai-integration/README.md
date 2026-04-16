@@ -53,10 +53,14 @@ There is no active `/api/ai/*` route stack in `server/api`.
 To improve assistant quality for project-specific questions, this repo adds custom MCP tools in
 [`../../server/mcp/tools`](../../server/mcp/tools):
 
-- `search-knowledge` — unified search across `docs`, `faqs`, and `people`
+- `search-knowledge` — unified search across `docs`, `faqs`, `people`, and `assistantFacts`, with
+  optional FAQ metadata filters
 - `list-insights` — structured list of all insight pages
 - `recommend-insights` — objective-driven recommendations for which insights to read first
-- `list-faqs` — FAQ listing with optional query filtering
+- `list-faqs` — FAQ listing with optional query + metadata filtering (`category`, `audience`,
+  `tags`)
+- `list-assistant-facts` — assistant-only guidance/facts retrieval (not rendered in app and not in
+  `llms.txt`)
 
 These tools are consumed by the Docus assistant runtime through the configured MCP server.
 

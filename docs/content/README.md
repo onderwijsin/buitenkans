@@ -9,6 +9,7 @@ Defined in [`../../content.config.ts`](../../content.config.ts):
 - `docs` (`content/docs/**/*.md`, prefixed to `/docs`)
 - `faqs` (`content/faqs/**/*.md`, prefixed to `/faqs`)
 - `people` (`content/people/**/*.yml`)
+- `assistantFacts` (`content/assistant-facts/**/*.yml`, assistant-only guidance data)
 
 The `docs` collection is declared explicitly (instead of relying on implicit Docus defaults) so the
 runtime always has a concrete `_content_docs` table contract.
@@ -27,6 +28,11 @@ See [`../ci-cd/README.md`](../ci-cd/README.md) for exact branch automation behav
 
 - `title` (string)
 - `description` (string)
+- `category` (optional enum: `algemeen`, `strategie`, `ontwerp`, `start`, `uitvoering`,
+  `succesfactoren`, `behoud`)
+- `audience` (optional array enum: `bestuurders`, `programmamakers`)
+- `tags` (optional string array)
+- `related` (optional string array of internal doc paths)
 
 `people` fields:
 
@@ -35,7 +41,23 @@ See [`../ci-cd/README.md`](../ci-cd/README.md) for exact branch automation behav
 - `employer` (nullable string)
 - `avatar` (nullable string)
 
+`assistantFacts` fields:
+
+- `key` (string)
+- `title` (string)
+- `summary` (string)
+- `guidance` (string)
+- `aliases` (optional string array)
+- `tags` (optional string array)
+- `priority` (number, 1-5)
+
 Keep these stable unless a coordinated schema + UI change is requested.
+
+`assistantFacts` is intentionally assistant-only:
+
+- not rendered as app pages
+- not included in `llms.txt` sections
+- consumed via MCP tools
 
 `docs` fields:
 

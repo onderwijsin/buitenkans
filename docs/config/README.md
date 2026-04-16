@@ -20,7 +20,7 @@ config.
 - [`../../app/app.config.ts`](../../app/app.config.ts)
   - Docus/UI app-level config (assistant FAQ prompts, header/socials, UI tuning)
 - [`../../content.config.ts`](../../content.config.ts)
-  - Nuxt Content collection sources and schemas (`docs`, `faqs`, `people`)
+  - Nuxt Content collection sources and schemas (`docs`, `faqs`, `people`, `assistantFacts`)
 - [`../../components.json`](../../components.json)
   - shadcn-vue style component config used for the local Inspira-style component setup
 - [`./docus-nl-locale-patch.md`](./docus-nl-locale-patch.md)
