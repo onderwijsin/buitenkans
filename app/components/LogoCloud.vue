@@ -75,41 +75,43 @@ const { left: leftMarquee, right: rightMarquee } = splitLogosEvenly(logos)
 </script>
 
 <template>
-	<div class="grid">
-		<UMarquee
-			class="w-full min-w-0"
-			:ui="{ root: '[--duration:30s]', content: '!justify-start !w-max' }"
-		>
-			<div
-				v-for="(logo, index) in leftMarquee"
-				:key="index"
-				class="grid rounded-md bg-white p-4 dark:opacity-60"
+	<ClientOnly>
+		<div class="grid">
+			<UMarquee
+				class="w-full min-w-0"
+				:ui="{ root: '[--duration:30s]', content: '!justify-start !w-max' }"
 			>
-				<NuxtImg
-					:src="logo.src"
-					:alt="logo.alt"
-					loading="lazy"
-					class="h-8 w-auto object-contain object-center"
-				/>
-			</div>
-		</UMarquee>
-		<UMarquee
-			reverse
-			class="w-full min-w-0"
-			:ui="{ root: '[--duration:30s]', content: '!justify-start !w-max' }"
-		>
-			<div
-				v-for="(logo, index) in rightMarquee"
-				:key="index"
-				class="grid rounded-md bg-white p-4 dark:opacity-60"
+				<div
+					v-for="(logo, index) in leftMarquee"
+					:key="index"
+					class="grid rounded-md bg-white p-4 dark:opacity-60"
+				>
+					<NuxtImg
+						:src="logo.src"
+						:alt="logo.alt"
+						loading="lazy"
+						class="h-8 w-auto object-contain object-center"
+					/>
+				</div>
+			</UMarquee>
+			<UMarquee
+				reverse
+				class="w-full min-w-0"
+				:ui="{ root: '[--duration:30s]', content: '!justify-start !w-max' }"
 			>
-				<NuxtImg
-					:src="logo.src"
-					:alt="logo.alt"
-					loading="lazy"
-					class="h-8 w-auto object-contain object-center"
-				/>
-			</div>
-		</UMarquee>
-	</div>
+				<div
+					v-for="(logo, index) in rightMarquee"
+					:key="index"
+					class="grid rounded-md bg-white p-4 dark:opacity-60"
+				>
+					<NuxtImg
+						:src="logo.src"
+						:alt="logo.alt"
+						loading="lazy"
+						class="h-8 w-auto object-contain object-center"
+					/>
+				</div>
+			</UMarquee>
+		</div>
+	</ClientOnly>
 </template>

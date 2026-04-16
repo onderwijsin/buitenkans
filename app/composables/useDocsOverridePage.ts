@@ -39,7 +39,11 @@ export async function useDocsOverridePage(options: UseDocsOverridePageOptions = 
 	)
 
 	if (!page.value) {
-		throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+		throw createError({
+			statusCode: 404,
+			statusMessage: 'Item niet gevonden',
+			fatal: import.meta.client
+		})
 	}
 
 	const { data: surround } = await useAsyncData(
