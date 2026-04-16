@@ -1,14 +1,16 @@
 /**
  * File overview:
  * - Registers MCP tool `search-knowledge`.
- * - Provides one cross-collection search entrypoint over `docs`, `faqs`, `people`, and `assistantFacts`.
+ * - Provides one cross-collection search entrypoint over `docs`, `faqs`, and `people`.
  * - Uses lightweight keyword scoring to return ranked matches with stable page URLs.
  * - Intended as the assistant's broad discovery tool before reading specific pages.
  */
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 
-const knowledgeTypes = ['docs', 'faqs', 'people', 'assistantFacts'] as const
+import { resolveWithFallback } from '../../utils/mcp-tool-runtime'
+
+const knowledgeTypes = ['docs', 'faqs', 'people'] as const
 const faqCategories = [
 	'algemeen',
 	'strategie',
@@ -60,11 +62,10 @@ const scoreText = (
 }
 
 export default defineMcpTool({
-	description: `Searches across docs pages, FAQ entries, klankbordgroep people records, and assistant-only guidance facts in one call.
+	description: `Searches across docs pages, FAQ entries, and klankbordgroep people records in one call.
 
 WHEN TO USE:
 - User asks a broad question and you don't know if the answer sits in docs, FAQ, or people.
-- User asks configuration questions about the assistant itself.
 - You need a quick shortlist of relevant sources before calling get-page.
 - User asks practical questions ("hoe werkt dit", "wie doet mee", "welke inzichten").
 
@@ -82,7 +83,7 @@ OUTPUT:
 		types: z
 			.array(z.enum(knowledgeTypes))
 			.optional()
-			.describe('Optional subset of sources to search: docs, faqs, people, assistantFacts'),
+			.describe('Optional subset of sources to search: docs, faqs, people'),
 		faqCategories: z
 			.array(z.enum(faqCategories))
 			.optional()
@@ -130,11 +131,16 @@ OUTPUT:
 		const results: KnowledgeResult[] = []
 
 		if (requestedTypes.includes('docs')) {
-			const docs = await queryCollection(event, 'docs')
-				.select('title', 'description', 'path')
-				.where('extension', '=', 'md')
-				.where('path', 'NOT LIKE', '%/.navigation')
-				.all()
+			const docs = await resolveWithFallback(
+				() =>
+					queryCollection(event, 'docs')
+						.select('title', 'description', 'path')
+						.where('extension', '=', 'md')
+						.where('path', 'NOT LIKE', '%/.navigation')
+						.all(),
+				'docs search source',
+				[]
+			)
 
 			for (const doc of docs) {
 				const path = doc.path || ''
@@ -163,9 +169,22 @@ OUTPUT:
 		}
 
 		if (requestedTypes.includes('faqs')) {
-			const faqs = await queryCollection(event, 'faqs')
-				.select('title', 'description', 'path', 'category', 'audience', 'tags', 'related')
-				.all()
+			const faqs = await resolveWithFallback(
+				() =>
+					queryCollection(event, 'faqs')
+						.select(
+							'title',
+							'description',
+							'path',
+							'category',
+							'audience',
+							'tags',
+							'related'
+						)
+						.all(),
+				'faq search source',
+				[]
+			)
 
 			for (const faq of faqs) {
 				if (
@@ -222,9 +241,11 @@ OUTPUT:
 		}
 
 		if (requestedTypes.includes('people')) {
-			const people = await queryCollection(event, 'people')
-				.select('name', 'job', 'employer')
-				.all()
+			const people = await resolveWithFallback(
+				() => queryCollection(event, 'people').select('name', 'job', 'employer').all(),
+				'people search source',
+				[]
+			)
 
 			for (const person of people) {
 				const summary = [person.job, person.employer].filter(Boolean).join(' · ')
@@ -244,34 +265,6 @@ OUTPUT:
 					path: '/docs/duik-dieper/klankbordgroep',
 					url: `${siteUrl}/docs/duik-dieper/klankbordgroep`,
 					score
-				})
-			}
-		}
-
-		if (requestedTypes.includes('assistantFacts')) {
-			const facts = await queryCollection(event, 'assistantFacts')
-				.select('key', 'title', 'summary', 'guidance', 'aliases', 'tags', 'priority')
-				.all()
-
-			for (const fact of facts) {
-				const score =
-					scoreText(normalizedQuery, tokens, fact.title || '', 70, 10) +
-					scoreText(normalizedQuery, tokens, fact.summary || '', 40, 6) +
-					scoreText(normalizedQuery, tokens, fact.guidance || '', 50, 8) +
-					scoreText(normalizedQuery, tokens, (fact.aliases || []).join(' '), 65, 10) +
-					scoreText(normalizedQuery, tokens, (fact.tags || []).join(' '), 30, 5)
-
-				if (score <= 0) {
-					continue
-				}
-
-				results.push({
-					type: 'assistantFacts',
-					title: fact.title || fact.key || 'Assistant fact',
-					summary: fact.summary || '',
-					path: `assistant-facts:${fact.key || 'unknown'}`,
-					url: `assistant-facts:${fact.key || 'unknown'}`,
-					score: score + (fact.priority || 3) * 2
 				})
 			}
 		}

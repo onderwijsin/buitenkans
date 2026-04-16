@@ -8,6 +8,8 @@
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 
+import { resolveWithFallback } from '../../utils/mcp-tool-runtime'
+
 const faqCategories = [
 	'algemeen',
 	'strategie',
@@ -111,9 +113,22 @@ WHEN TO USE:
 		const event = useEvent()
 		const siteUrl = getRequestURL(event).origin
 
-		const faqs = await queryCollection(event, 'faqs')
-			.select('title', 'description', 'path', 'category', 'audience', 'tags', 'related')
-			.all()
+		const faqs = await resolveWithFallback(
+			() =>
+				queryCollection(event, 'faqs')
+					.select(
+						'title',
+						'description',
+						'path',
+						'category',
+						'audience',
+						'tags',
+						'related'
+					)
+					.all(),
+			'faq source',
+			[]
+		)
 
 		const normalizedQuery = query ? normalizeText(query) : ''
 		const tokens = query ? tokenize(query) : []

@@ -75,14 +75,14 @@ Automation:
   - `list-insights`
   - `recommend-insights`
   - `list-faqs`
-  - `list-assistant-facts`
+- custom tools are fail-fast hardened:
+  - collection reads run with timeouts and fallback behavior to avoid assistant hangs
 - each custom MCP tool file has an inline top-level "File overview" comment documenting purpose and
   usage:
   - `server/mcp/tools/search-knowledge.ts`
   - `server/mcp/tools/list-insights.ts`
   - `server/mcp/tools/recommend-insights.ts`
   - `server/mcp/tools/list-faqs.ts`
-  - `server/mcp/tools/list-assistant-facts.ts`
 - no custom `/api/ai/*` feature set currently present
 
 ## OG Font Guardrails

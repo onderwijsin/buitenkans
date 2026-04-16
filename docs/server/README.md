@@ -11,7 +11,6 @@ This document describes active server routes and runtime behavior.
 - `server/mcp/tools/list-insights.ts`
 - `server/mcp/tools/recommend-insights.ts`
 - `server/mcp/tools/list-faqs.ts`
-- `server/mcp/tools/list-assistant-facts.ts`
 - `server/routes/assets/[...pathname].get.ts`
 - `server/routes/raw/docs/inzichten/overzicht.md.get.ts`
 - `server/routes/raw/docs/duik-dieper/klankbordgroep.md.get.ts`
@@ -29,16 +28,18 @@ Docus includes an MCP server that powers the integrated assistant.
 In addition to Docus defaults (`list-pages`, `get-page`), this project provides custom tools in
 `server/mcp/tools/*` for domain-specific retrieval and recommendations:
 
-| Tool                   | Description                                                                                              |
-| ---------------------- | -------------------------------------------------------------------------------------------------------- |
-| `search-knowledge`     | Unified search across `docs`, `faqs`, `people`, and `assistantFacts` with optional FAQ metadata filters. |
-| `list-insights`        | Structured list of all insight pages with optional summaries.                                            |
-| `recommend-insights`   | Objective-driven recommendations for which insights to read first.                                       |
-| `list-faqs`            | FAQ listing with optional query + metadata filters and ranked results.                                   |
-| `list-assistant-facts` | Assistant-only facts/guidance retrieval for project-specific behavior.                                   |
+| Tool                 | Description                                                                            |
+| -------------------- | -------------------------------------------------------------------------------------- |
+| `search-knowledge`   | Unified search across `docs`, `faqs`, and `people` with optional FAQ metadata filters. |
+| `list-insights`      | Structured list of all insight pages with optional summaries.                          |
+| `recommend-insights` | Objective-driven recommendations for which insights to read first.                     |
+| `list-faqs`          | FAQ listing with optional query + metadata filters and ranked results.                 |
 
 Each custom tool file now contains a top-level "File overview" comment that documents the tool's
 purpose and intended usage context inline with implementation.
+
+All custom MCP tools include fail-fast collection timeout guards so one stalled source cannot block
+the assistant response stream.
 
 See [`../ai-integration/README.md`](../ai-integration/README.md) for assistant config and MCP
 transport details.

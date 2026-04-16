@@ -8,6 +8,8 @@
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 
+import { resolveWithFallback } from '../../utils/mcp-tool-runtime'
+
 export default defineMcpTool({
 	description: `Lists all "inzichten" pages as a structured set.
 
@@ -33,12 +35,17 @@ WHEN TO USE:
 		const event = useEvent()
 		const siteUrl = getRequestURL(event).origin
 
-		const insights = await queryCollection(event, 'docs')
-			.select('title', 'description', 'path', 'stem')
-			.where('extension', '=', 'md')
-			.where('stem', 'LIKE', '%1.inzichten%')
-			.where('stem', 'NOT LIKE', '%00.overzicht%')
-			.all()
+		const insights = await resolveWithFallback(
+			() =>
+				queryCollection(event, 'docs')
+					.select('title', 'description', 'path', 'stem')
+					.where('extension', '=', 'md')
+					.where('stem', 'LIKE', '%1.inzichten%')
+					.where('stem', 'NOT LIKE', '%00.overzicht%')
+					.all(),
+			'insights source',
+			[]
+		)
 
 		const ordered = insights.sort((a, b) => (a.stem || '').localeCompare(b.stem || ''))
 

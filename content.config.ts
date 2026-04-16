@@ -61,19 +61,6 @@ export default defineContentConfig({
 				employer: z.string().nullable(),
 				avatar: z.string().nullable()
 			})
-		}),
-		assistantFacts: defineCollection({
-			type: 'data',
-			source: 'assistant-facts/**/*.yml',
-			schema: z.object({
-				key: z.string(),
-				title: z.string(),
-				summary: z.string(),
-				guidance: z.string(),
-				aliases: z.array(z.string()).optional(),
-				tags: z.array(z.string()).optional(),
-				priority: z.number().int().min(1).max(5).default(3)
-			})
 		})
 	}
 })

@@ -7,8 +7,6 @@ Configured in `content.config.ts`:
 - `faqs` (`content/faqs/**.md`): `title`, `description`, `category?`, `audience?`, `tags?`,
   `related?`
 - `people` (`content/people/**.yml`): `name`, `job`, `employer|null`, `avatar|null`
-- `assistantFacts` (`content/assistant-facts/**.yml`): `key`, `title`, `summary`, `guidance`,
-  `aliases?`, `tags?`, `priority`
 
 Docus docs pages come from `content/docs/**`.
 
@@ -44,13 +42,13 @@ Shared logic:
 
 Custom assistant tools in `server/mcp/tools/*`:
 
-- `search-knowledge` — unified search across `docs`, `faqs`, `people`, and `assistantFacts` with
-  optional FAQ metadata filters
+- `search-knowledge` — unified search across `docs`, `faqs`, and `people` with optional FAQ metadata
+  filters
 - `list-insights` — structured list of all insight pages
 - `recommend-insights` — objective-driven recommendations for which insights to read first
 - `list-faqs` — FAQ listing with optional query + metadata filtering (`category`, `audience`,
   `tags`)
-- `list-assistant-facts` — assistant-only facts/guidance retrieval (internal, non-rendered content)
+- all tools use timeout + fallback guards to avoid long-running/stalled MCP responses
 
 Consumed by the Docus assistant runtime through MCP.
 
@@ -66,7 +64,6 @@ Active files:
 - `server/mcp/tools/list-insights.ts`
 - `server/mcp/tools/recommend-insights.ts`
 - `server/mcp/tools/list-faqs.ts`
-- `server/mcp/tools/list-assistant-facts.ts`
 - `server/routes/raw/docs/inzichten/overzicht.md.get.ts`
 - `server/routes/raw/docs/duik-dieper/veelgestelde-vragen.md.get.ts`
 - `server/routes/raw/docs/duik-dieper/klankbordgroep.md.get.ts`

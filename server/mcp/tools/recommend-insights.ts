@@ -8,6 +8,8 @@
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 
+import { resolveWithFallback } from '../../utils/mcp-tool-runtime'
+
 const normalizeText = (value: string) =>
 	value
 		.normalize('NFD')
@@ -116,12 +118,17 @@ OUTPUT:
 		const normalizedInput = normalizeText(combinedInput)
 		const tokens = tokenize(combinedInput)
 
-		const insights = await queryCollection(event, 'docs')
-			.select('title', 'description', 'path', 'stem')
-			.where('extension', '=', 'md')
-			.where('stem', 'LIKE', '%1.inzichten%')
-			.where('stem', 'NOT LIKE', '%00.overzicht%')
-			.all()
+		const insights = await resolveWithFallback(
+			() =>
+				queryCollection(event, 'docs')
+					.select('title', 'description', 'path', 'stem')
+					.where('extension', '=', 'md')
+					.where('stem', 'LIKE', '%1.inzichten%')
+					.where('stem', 'NOT LIKE', '%00.overzicht%')
+					.all(),
+			'insights recommendation source',
+			[]
+		)
 
 		const scored = insights
 			.map((insight) => {
