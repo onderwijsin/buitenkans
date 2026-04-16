@@ -4,8 +4,11 @@
 
 Configured in `content.config.ts`:
 
-- `faqs` (`content/faqs/**.md`): `title`, `description`
+- `faqs` (`content/faqs/**.md`): `title`, `description`, `category?`, `audience?`, `tags?`,
+  `related?`
 - `people` (`content/people/**.yml`): `name`, `job`, `employer|null`, `avatar|null`
+- `assistantFacts` (`content/assistant-facts/**.yml`): `key`, `title`, `summary`, `guidance`,
+  `aliases?`, `tags?`, `priority`
 
 Docus docs pages come from `content/docs/**`.
 
@@ -15,6 +18,13 @@ Docus docs pages come from `content/docs/**`.
 - `/docs/inzichten/overzicht` -> cards generated from docs collection
 - `/docs/duik-dieper/veelgestelde-vragen` -> FAQ collection list
 - `/docs/duik-dieper/klankbordgroep` -> people collection list
+
+Shared override-page abstractions:
+
+- `app/composables/useDocsOverridePage.ts`
+  - shared docs page loading + SEO/OG + headline/breadcrumbs + raw prerender registration
+- `app/components/DocsOverridePage.vue`
+  - shared page shell/header-links pattern used by the three custom docs routes
 
 ## Raw Markdown Overrides
 
@@ -34,10 +44,13 @@ Shared logic:
 
 Custom assistant tools in `server/mcp/tools/*`:
 
-- `search-knowledge` — unified search across `docs`, `faqs`, and `people`
+- `search-knowledge` — unified search across `docs`, `faqs`, `people`, and `assistantFacts` with
+  optional FAQ metadata filters
 - `list-insights` — structured list of all insight pages
 - `recommend-insights` — objective-driven recommendations for which insights to read first
-- `list-faqs` — FAQ listing with optional query filtering
+- `list-faqs` — FAQ listing with optional query + metadata filtering (`category`, `audience`,
+  `tags`)
+- `list-assistant-facts` — assistant-only facts/guidance retrieval (internal, non-rendered content)
 
 Consumed by the Docus assistant runtime through MCP.
 
@@ -53,6 +66,7 @@ Active files:
 - `server/mcp/tools/list-insights.ts`
 - `server/mcp/tools/recommend-insights.ts`
 - `server/mcp/tools/list-faqs.ts`
+- `server/mcp/tools/list-assistant-facts.ts`
 - `server/routes/raw/docs/inzichten/overzicht.md.get.ts`
 - `server/routes/raw/docs/duik-dieper/veelgestelde-vragen.md.get.ts`
 - `server/routes/raw/docs/duik-dieper/klankbordgroep.md.get.ts`

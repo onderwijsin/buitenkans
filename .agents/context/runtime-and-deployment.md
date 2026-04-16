@@ -4,6 +4,9 @@
 
 - `extends: ['docus']`
 - Nitro preset: `cloudflare_module`
+- Nuxt Content local DB for dev/prerender is memory-backed:
+  - `content._localDatabase = { type: 'sqlite', filename: ':memory:' }`
+  - prevents stale file reuse (`_content_docs` missing-table failures after `prepare/typecheck`)
 - production route rule prerenders `/**`
 - `/assets/**` served through blob route
 - `/stats` redirects to Plausible dashboard
@@ -72,6 +75,14 @@ Automation:
   - `list-insights`
   - `recommend-insights`
   - `list-faqs`
+  - `list-assistant-facts`
+- each custom MCP tool file has an inline top-level "File overview" comment documenting purpose and
+  usage:
+  - `server/mcp/tools/search-knowledge.ts`
+  - `server/mcp/tools/list-insights.ts`
+  - `server/mcp/tools/recommend-insights.ts`
+  - `server/mcp/tools/list-faqs.ts`
+  - `server/mcp/tools/list-assistant-facts.ts`
 - no custom `/api/ai/*` feature set currently present
 
 ## OG Font Guardrails

@@ -46,6 +46,7 @@ const links = computed<FooterLink[]>(() => {
 			v-for="(link, index) of links"
 			:key="index"
 			size="sm"
+			class="relative z-10"
 			v-bind="{ color: 'neutral', variant: 'ghost', ...link }"
 		/>
 	</template>

@@ -81,45 +81,6 @@ const insights: {
 	}
 ]
 
-const logos: { src: string; alt: string }[] = [
-	{ src: '/logos/archipel.png', alt: 'Archipel Scholen' },
-	{ src: '/logos/ascenda.png', alt: 'Ascenda herregistratie' },
-	{ src: '/logos/attendiz.png', alt: 'Attendiz' },
-	{ src: '/logos/avs.png', alt: 'AVS academie & vakvereniging schoolleiders' },
-	{ src: '/logos/ijsselgraaf.png', alt: 'IJsselgraaf' },
-	{ src: '/logos/iselinge.png', alt: 'Iselinge Hogeschool' },
-	{ src: '/logos/keender.png', alt: 'Keender' },
-	{ src: '/logos/kpz.png', alt: 'Hogeschool KPZ' },
-	{ src: '/logos/lp.png', alt: 'LP' },
-	{ src: '/logos/mijnplein.png', alt: 'Mijnplein' },
-	{ src: '/logos/ocw.png', alt: 'Ministerie van Onderwijs, Cultuur en Wetenschap' },
-	{ src: '/logos/onderwijs_specialisten.png', alt: 'De Onderwijs Specialisten' },
-	{ src: '/logos/onderwijsin.png', alt: 'OnderwijsIn' },
-	{ src: '/logos/oponoa.png', alt: 'Stichting OPONOA' },
-	{ src: '/logos/paraat.png', alt: 'Paraat scholen' },
-	{ src: '/logos/pon.png', alt: 'PON' },
-	{ src: '/logos/poraad.png', alt: 'PO-Raad' },
-	{ src: '/logos/pro.png', alt: 'PRO8' },
-	{ src: '/logos/regio_on.png', alt: 'RegioON Onderwijsregio Oost-Nederland' },
-	{ src: '/logos/regio_twente-eo.png', alt: 'Onderwijsregio Twente & Omstreken' },
-	{ src: '/logos/samen_sopo.png', alt: 'Samen SopoW' },
-	{ src: '/logos/saxion.png', alt: 'Saxion Hogeschool' },
-	{ src: '/logos/sg_veluwezoom.png', alt: 'Scholengroep Veluwezoom' },
-	{ src: '/logos/skbg.svg', alt: 'SKBG' },
-	{
-		src: '/logos/ssotog.png',
-		alt: 'SOTOG Stichting Speciaal Onderwijs Twente en Oost Gelderland'
-	},
-	{ src: '/logos/tof.png', alt: 'TOF Onderwijs' },
-	{ src: '/logos/windesheim.svg', alt: 'Windesheim' },
-	{ src: '/logos/zwolle.png', alt: 'Onderwijsregio Zwolle en omgeving' }
-]
-
-// Split logos in even arrays for left and right marquee
-
-const leftMarquee = logos.filter((_, index) => index % 2 === 0)
-const rightMarquee = logos.filter((_, index) => index % 2 !== 0)
-
 const countMap = {
 	0: 'eerste',
 	1: 'tweede',
@@ -166,11 +127,12 @@ function insightImageWidth(index: number) {
 </script>
 
 <template>
-	<div class="overflow-x-clip">
+	<div>
 		<UPageHero
 			:ui="{
-				container: 'pb-0 sm:pb-0 md:pb-0 lg:pb-0',
-				title: 'leading-snug text-pretty'
+				container: 'pb-0 py-16 sm:py-20 lg:pb-24 lg:pt-30',
+				title: 'leading-snug text-pretty',
+				headline: 'space-y-2 space-x-2'
 			}"
 		>
 			<template #headline>
@@ -180,7 +142,16 @@ function insightImageWidth(index: number) {
 					to="https://onderwijsin.nl"
 					variant="outline"
 				>
-					Ontdek Onderwijs in →
+					Ontdek Onderwijs in
+				</UButton>
+				<UButton
+					icon="lucide:sparkles"
+					size="sm"
+					to="https://regioon.nl"
+					variant="outline"
+					color="neutral"
+				>
+					Ontdek Regio Oost Nederland
 				</UButton>
 			</template>
 			<template #title>
@@ -214,14 +185,18 @@ function insightImageWidth(index: number) {
 			</template>
 		</UPageHero>
 
+		<LandingReveal direction="up" :delay-ms="50">
+			<LogoCloud />
+		</LandingReveal>
+
 		<!-- SECTION -->
-		<UPageSection>
+		<UPageSection :ui="{ container: 'sm:pt-24 lg:py-24' }">
 			<UPageGrid class="lg:grid-cols-6">
 				<!-- CARD 1 -->
 				<LandingReveal
 					class="group col-span-1 sm:col-span-2"
 					direction="left"
-					:delay-ms="40"
+					:delay-ms="150"
 				>
 					<UPageCard class="h-full" spotlight>
 						<template #title>
@@ -251,7 +226,7 @@ function insightImageWidth(index: number) {
 				<LandingReveal
 					class="col-span-1 sm:col-span-2 lg:col-span-4"
 					direction="right"
-					:delay-ms="80"
+					:delay-ms="300"
 				>
 					<UPageCard
 						class="h-full"
@@ -277,7 +252,7 @@ function insightImageWidth(index: number) {
 					class="col-span-1 sm:col-span-2"
 					:class="insightGridClass(i)"
 					:direction="insightDirection(i)"
-					:delay-ms="120 + i * 45"
+					:delay-ms="200"
 				>
 					<UPageCard
 						class="h-full"
@@ -316,14 +291,16 @@ function insightImageWidth(index: number) {
 				</LandingReveal>
 
 				<!-- CTA -->
-				<LandingReveal class="col-span-1 sm:col-span-2" direction="up-left" :delay-ms="440">
+				<LandingReveal class="col-span-1 sm:col-span-2" direction="up-left" :delay-ms="200">
 					<UPageCard
 						class="h-full"
 						variant="subtle"
 						title="Aan de slag!"
-						description="Ontdek alle inzichten, lessen, handige tips en tools die Buitenkans heeft opgeleverd."
+						description="De druk op schoolleiderschap neemt toe — en traditionele routes zijn niet genoeg. Buitenkans laat zien hoe je nieuwe routes ontwerpt én succesvol uitvoert."
 					>
-						<div class="mx-auto flex w-full max-w-xs flex-col gap-3 text-center">
+						<div
+							class="mt-auto flex w-full flex-col gap-3 text-center sm:max-w-xs lg:max-w-full"
+						>
 							<UButton
 								block
 								color="primary"
@@ -353,48 +330,59 @@ function insightImageWidth(index: number) {
 				<LandingReveal
 					class="col-span-1 min-w-0 sm:col-span-2 md:min-h-68 lg:col-span-4"
 					direction="up-right"
-					:delay-ms="500"
+					:delay-ms="200"
 				>
 					<UPageCard
 						class="h-full min-w-0 overflow-x-hidden"
 						title="Een handreiking van het veld"
 						description="Deze handreiking is ontwikkeld dóór en met het werkveld: een samenwerking tussen Onderwijsregio Oost-Nederland, Stichting Onderwijs in, hogescholen en landelijke partners."
 					>
-						<UMarquee
-							class="w-full min-w-0"
-							:ui="{ root: '[--duration:30s]', content: '!justify-start !w-max' }"
+						<NuxtImg
+							src="bijeenkomst.jpg"
+							class="w-full overflow-hidden rounded-lg dark:opacity-70"
+						/>
+					</UPageCard>
+				</LandingReveal>
+
+				<LandingReveal
+					class="col-span-1 min-w-0 sm:col-span-2 lg:col-span-6"
+					direction="left"
+					:delay-ms="200"
+				>
+					<UPageCard
+						orientation="horizontal"
+						title="Ontwikkelt binnen de Onderwijsregio Oost Nederland"
+						:ui="{
+							container: 'p-0 sm:p-0',
+							wrapper: 'p-4 sm:p-6 gap-6',
+							description: 'space-y-6'
+						}"
+						variant="subtle"
+					>
+						<template #leading>
+							<NuxtImg src="/logos/regio_on.png" class="max-h-16" />
+						</template>
+						<template #description>
+							<p>
+								De inzichten in deze handreiking zijn voortgekomen uit het project
+								Buitenkans, uitgevoerd in de Onderwijsregio Oost-Nederland. Deze
+								regio een coöperatie van 52 schoolbesturen in het primair onderwijs
+								en 6 hogescholen.
+							</p>
+							<UButton
+								label="Ontdek de onderwijsregio"
+								trailing-icon="lucide:arrow-up-right"
+								size="sm"
+								color="neutral"
+								variant="subtle"
+								to="https://regioon.nl/"
+							/>
+						</template>
+						<div
+							class="grid h-full w-full place-items-center bg-[#E7ECF3] sm:py-8 dark:bg-neutral-950/50"
 						>
-							<div
-								v-for="(logo, index) in leftMarquee"
-								:key="index"
-								class="grid rounded-md bg-white p-4 dark:opacity-60"
-							>
-								<NuxtImg
-									:src="logo.src"
-									:alt="logo.alt"
-									loading="lazy"
-									class="h-8 w-auto object-contain object-center"
-								/>
-							</div>
-						</UMarquee>
-						<UMarquee
-							reverse
-							class="w-full min-w-0"
-							:ui="{ root: '[--duration:30s]', content: '!justify-start !w-max' }"
-						>
-							<div
-								v-for="(logo, index) in rightMarquee"
-								:key="index"
-								class="grid rounded-md bg-white p-4 dark:opacity-60"
-							>
-								<NuxtImg
-									:src="logo.src"
-									:alt="logo.alt"
-									loading="lazy"
-									class="h-8 w-auto object-contain object-center"
-								/>
-							</div>
-						</UMarquee>
+							<NuxtImg src="regioon.webp" class="mx-auto max-h-80 dark:opacity-70" />
+						</div>
 					</UPageCard>
 				</LandingReveal>
 			</UPageGrid>

@@ -13,7 +13,7 @@ if (!page.value) {
 	throw createError({
 		statusCode: 404,
 		statusMessage: 'Item niet gevonden',
-		fatal: true
+		fatal: import.meta.client
 	})
 }
 const { data: surround } = await useAsyncData(`${route.path}-surround`, () => {

@@ -20,7 +20,7 @@ config.
 - [`../../app/app.config.ts`](../../app/app.config.ts)
   - Docus/UI app-level config (assistant FAQ prompts, header/socials, UI tuning)
 - [`../../content.config.ts`](../../content.config.ts)
-  - Nuxt Content data collection schemas
+  - Nuxt Content collection sources and schemas (`docs`, `faqs`, `people`, `assistantFacts`)
 - [`../../components.json`](../../components.json)
   - shadcn-vue style component config used for the local Inspira-style component setup
 - [`./docus-nl-locale-patch.md`](./docus-nl-locale-patch.md)
@@ -39,6 +39,19 @@ config.
 - Keep secrets in environment variables and `runtimeConfig`.
 - Avoid hardcoding secrets in `config/*` or app source files.
 - Treat `MODE` as the source for environment behavior (`dev`, `preview`, `prod`).
+
+## Nuxt Content Local DB (Dev/Prerender)
+
+- `nuxt.config.ts` sets:
+  - `content._localDatabase.type = 'sqlite'`
+  - `content._localDatabase.filename = ':memory:'`
+- Rationale:
+  - avoid stale/empty local SQLite files between `nuxt prepare`/`nuxi typecheck` and `nuxt dev`
+  - prevent intermittent runtime failures like `no such table: _content_docs` caused by reused
+    invalid local DB state
+- Scope:
+  - this affects Nuxt Content local runtime (dev + nitro-prerender paths)
+  - Cloudflare production runtime still uses D1 via deployment preset behavior
 
 ## Typecheck Compatibility Notes
 
