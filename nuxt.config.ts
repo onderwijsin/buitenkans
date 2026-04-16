@@ -208,8 +208,8 @@ export default defineNuxtConfig({
 		},
 		repository: {
 			provider: 'github',
-			owner: process.env.GH_ORG,
-			repo: process.env.GH_REPO,
+			owner: 'onderwijsin',
+			repo: 'buitenkans',
 			branch: 'content'
 		},
 		media: {
