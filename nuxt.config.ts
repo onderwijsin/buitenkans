@@ -131,7 +131,8 @@ export default defineNuxtConfig({
 		prerender: {
 			crawlLinks: true,
 			failOnError: true,
-			routes: [...NUXT_BEHAVIOR_CONFIG.nitroPrerenderRoutes]
+			routes: [...NUXT_BEHAVIOR_CONFIG.nitroPrerenderRoutes],
+			ignore: ['/dev']
 		},
 		preset: 'cloudflare_module',
 		cloudflare: {

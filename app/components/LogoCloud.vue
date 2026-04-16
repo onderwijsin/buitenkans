@@ -76,7 +76,7 @@ const { left: leftMarquee, right: rightMarquee } = splitLogosEvenly(logos)
 
 <template>
 	<ClientOnly>
-		<div class="grid">
+		<div class="grid gap-6">
 			<UMarquee
 				class="w-full min-w-0"
 				:ui="{ root: '[--duration:30s]', content: '!justify-start !w-max' }"

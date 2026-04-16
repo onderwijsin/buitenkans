@@ -238,7 +238,7 @@ function insightImageWidth(index: number) {
 					class="col-span-1 sm:col-span-2"
 					:class="insightGridClass(i)"
 					:direction="insightDirection(i)"
-					:delay-ms="120 + i * 45"
+					:delay-ms="200"
 				>
 					<UPageCard
 						class="h-full"
@@ -277,7 +277,7 @@ function insightImageWidth(index: number) {
 				</LandingReveal>
 
 				<!-- CTA -->
-				<LandingReveal class="col-span-1 sm:col-span-2" direction="up-left" :delay-ms="440">
+				<LandingReveal class="col-span-1 sm:col-span-2" direction="up-left" :delay-ms="200">
 					<UPageCard
 						class="h-full"
 						variant="subtle"
@@ -314,7 +314,7 @@ function insightImageWidth(index: number) {
 				<LandingReveal
 					class="col-span-1 min-w-0 sm:col-span-2 md:min-h-68 lg:col-span-4"
 					direction="up-right"
-					:delay-ms="500"
+					:delay-ms="200"
 				>
 					<UPageCard
 						class="h-full min-w-0 overflow-x-hidden"
@@ -322,6 +322,48 @@ function insightImageWidth(index: number) {
 						description="Deze handreiking is ontwikkeld dóór en met het werkveld: een samenwerking tussen Onderwijsregio Oost-Nederland, Stichting Onderwijs in, hogescholen en landelijke partners."
 					>
 						<LogoCloud />
+					</UPageCard>
+				</LandingReveal>
+
+				<LandingReveal
+					class="col-span-1 min-w-0 sm:col-span-2 lg:col-span-6"
+					direction="left"
+					:delay-ms="200"
+				>
+					<UPageCard
+						orientation="horizontal"
+						title="Ontwikkelt binnen de Onderwijsregio Oost Nederland"
+						:ui="{
+							container: 'p-0 sm:p-0',
+							wrapper: 'p-4 sm:p-6 gap-6',
+							description: 'space-y-6'
+						}"
+						variant="subtle"
+					>
+						<template #leading>
+							<NuxtImg src="/logos/regio_on.png" class="max-h-16" />
+						</template>
+						<template #description>
+							<p>
+								De inzichten in deze handreiking zijn voortgekomen uit het project
+								Buitenkans, uitgevoerd in de Onderwijsregio Oost-Nederland. Deze
+								regio een coöperatie van 52 schoolbesturen in het primair onderwijs
+								en 6 hogescholen.
+							</p>
+							<UButton
+								label="Ontdek de onderwijsregio"
+								trailing-icon="lucide:arrow-up-right"
+								size="sm"
+								color="neutral"
+								variant="subtle"
+								to="https://regioon.nl/"
+							/>
+						</template>
+						<div
+							class="grid h-full w-full place-items-center bg-[#E7ECF3] sm:py-8 dark:bg-neutral-950/50"
+						>
+							<NuxtImg src="regioon.webp" class="mx-auto max-h-80 dark:opacity-70" />
+						</div>
 					</UPageCard>
 				</LandingReveal>
 			</UPageGrid>
