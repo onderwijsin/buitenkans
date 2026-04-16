@@ -1,3 +1,10 @@
+/**
+ * File overview:
+ * - Registers MCP tool `recommend-insights`.
+ * - Scores and ranks insight pages against a user goal (+ optional context).
+ * - Combines title/description text scoring with curated per-page theme keyword boosts.
+ * - Returns a short prioritized reading list with rationale strings for assistant responses.
+ */
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 

@@ -35,6 +35,9 @@ In addition to Docus defaults (`list-pages`, `get-page`), this project provides 
 | `recommend-insights` | Objective-driven recommendations for which insights to read first. |
 | `list-faqs`          | FAQ listing with optional query filtering and ranked results.      |
 
+Each custom tool file now contains a top-level "File overview" comment that documents the tool's
+purpose and intended usage context inline with implementation.
+
 See [`../ai-integration/README.md`](../ai-integration/README.md) for assistant config and MCP
 transport details.
 
@@ -83,3 +86,17 @@ removal criteria.
 - `Authorization: Bearer <API_TOKEN>`
 
 This helper is available for trusted server-to-server checks.
+
+## Troubleshooting
+
+### `no such table: _content_docs` during local runtime
+
+Expected prevention is now configured in `nuxt.config.ts` via
+`content._localDatabase.filename = ':memory:'`, so stale local content DB files are no longer used
+for dev/prerender flows.
+
+If you still hit this from an already-running old process:
+
+1. Stop dev server.
+2. Remove generated state: `.nuxt` and `.data/content`.
+3. Start again with `pnpm dev`.

@@ -1,3 +1,10 @@
+/**
+ * File overview:
+ * - Registers MCP tool `list-insights`.
+ * - Returns the full ordered set of insight pages from the `docs` collection.
+ * - Filters to the `1.inzichten` section and excludes the overview page itself.
+ * - Used when the assistant must enumerate all insights before narrowing recommendations.
+ */
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 

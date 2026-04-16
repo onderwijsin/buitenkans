@@ -1,3 +1,10 @@
+/**
+ * File overview:
+ * - Registers MCP tool `list-faqs`.
+ * - Lists FAQ entries from the `faqs` collection with optional query-based ranking.
+ * - Can return either Q+A pairs or question-only output for compact assistant context.
+ * - Used for practical "how/what/can" support questions and FAQ-specific retrieval.
+ */
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 

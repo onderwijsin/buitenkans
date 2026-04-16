@@ -81,45 +81,6 @@ const insights: {
 	}
 ]
 
-const logos: { src: string; alt: string }[] = [
-	{ src: '/logos/archipel.png', alt: 'Archipel Scholen' },
-	{ src: '/logos/ascenda.png', alt: 'Ascenda herregistratie' },
-	{ src: '/logos/attendiz.png', alt: 'Attendiz' },
-	{ src: '/logos/avs.png', alt: 'AVS academie & vakvereniging schoolleiders' },
-	{ src: '/logos/ijsselgraaf.png', alt: 'IJsselgraaf' },
-	{ src: '/logos/iselinge.png', alt: 'Iselinge Hogeschool' },
-	{ src: '/logos/keender.png', alt: 'Keender' },
-	{ src: '/logos/kpz.png', alt: 'Hogeschool KPZ' },
-	{ src: '/logos/lp.png', alt: 'LP' },
-	{ src: '/logos/mijnplein.png', alt: 'Mijnplein' },
-	{ src: '/logos/ocw.png', alt: 'Ministerie van Onderwijs, Cultuur en Wetenschap' },
-	{ src: '/logos/onderwijs_specialisten.png', alt: 'De Onderwijs Specialisten' },
-	{ src: '/logos/onderwijsin.png', alt: 'OnderwijsIn' },
-	{ src: '/logos/oponoa.png', alt: 'Stichting OPONOA' },
-	{ src: '/logos/paraat.png', alt: 'Paraat scholen' },
-	{ src: '/logos/pon.png', alt: 'PON' },
-	{ src: '/logos/poraad.png', alt: 'PO-Raad' },
-	{ src: '/logos/pro.png', alt: 'PRO8' },
-	{ src: '/logos/regio_on.png', alt: 'RegioON Onderwijsregio Oost-Nederland' },
-	{ src: '/logos/regio_twente-eo.png', alt: 'Onderwijsregio Twente & Omstreken' },
-	{ src: '/logos/samen_sopo.png', alt: 'Samen SopoW' },
-	{ src: '/logos/saxion.png', alt: 'Saxion Hogeschool' },
-	{ src: '/logos/sg_veluwezoom.png', alt: 'Scholengroep Veluwezoom' },
-	{ src: '/logos/skbg.svg', alt: 'SKBG' },
-	{
-		src: '/logos/ssotog.png',
-		alt: 'SOTOG Stichting Speciaal Onderwijs Twente en Oost Gelderland'
-	},
-	{ src: '/logos/tof.png', alt: 'TOF Onderwijs' },
-	{ src: '/logos/windesheim.svg', alt: 'Windesheim' },
-	{ src: '/logos/zwolle.png', alt: 'Onderwijsregio Zwolle en omgeving' }
-]
-
-// Split logos in even arrays for left and right marquee
-
-const leftMarquee = logos.filter((_, index) => index % 2 === 0)
-const rightMarquee = logos.filter((_, index) => index % 2 !== 0)
-
 const countMap = {
 	0: 'eerste',
 	1: 'tweede',
@@ -360,41 +321,7 @@ function insightImageWidth(index: number) {
 						title="Een handreiking van het veld"
 						description="Deze handreiking is ontwikkeld dóór en met het werkveld: een samenwerking tussen Onderwijsregio Oost-Nederland, Stichting Onderwijs in, hogescholen en landelijke partners."
 					>
-						<UMarquee
-							class="w-full min-w-0"
-							:ui="{ root: '[--duration:30s]', content: '!justify-start !w-max' }"
-						>
-							<div
-								v-for="(logo, index) in leftMarquee"
-								:key="index"
-								class="grid rounded-md bg-white p-4 dark:opacity-60"
-							>
-								<NuxtImg
-									:src="logo.src"
-									:alt="logo.alt"
-									loading="lazy"
-									class="h-8 w-auto object-contain object-center"
-								/>
-							</div>
-						</UMarquee>
-						<UMarquee
-							reverse
-							class="w-full min-w-0"
-							:ui="{ root: '[--duration:30s]', content: '!justify-start !w-max' }"
-						>
-							<div
-								v-for="(logo, index) in rightMarquee"
-								:key="index"
-								class="grid rounded-md bg-white p-4 dark:opacity-60"
-							>
-								<NuxtImg
-									:src="logo.src"
-									:alt="logo.alt"
-									loading="lazy"
-									class="h-8 w-auto object-contain object-center"
-								/>
-							</div>
-						</UMarquee>
+						<LogoCloud />
 					</UPageCard>
 				</LandingReveal>
 			</UPageGrid>

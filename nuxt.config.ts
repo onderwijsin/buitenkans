@@ -115,11 +115,13 @@ export default defineNuxtConfig({
 				'@vue/devtools-kit',
 				// 'fuse.js',
 				// '@vueuse/integrations/useFuse',
-				'zod'
+				'zod',
 				// '@tiptap/core',
 				// '@tiptap/starter-kit',
 				// '@tiptap/markdown',
 				// '@tiptap/**'
+				'@inspira-ui/plugins',
+				'class-variance-authority'
 			]
 		}
 	},
@@ -198,7 +200,7 @@ export default defineNuxtConfig({
 	},
 
 	studio: {
-		dev: false,
+		// dev: false,
 		route: '/studio',
 		i18n: {
 			defaultLocale: 'nl'

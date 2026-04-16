@@ -1,3 +1,10 @@
+/**
+ * File overview:
+ * - Registers MCP tool `search-knowledge`.
+ * - Provides one cross-collection search entrypoint over `docs`, `faqs`, and `people`.
+ * - Uses lightweight keyword scoring to return ranked matches with stable page URLs.
+ * - Intended as the assistant's broad discovery tool before reading specific pages.
+ */
 import { queryCollection } from '@nuxt/content/server'
 import { z } from 'zod'
 
