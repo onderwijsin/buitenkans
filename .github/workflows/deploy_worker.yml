@@ -111,9 +111,6 @@ jobs:
         env:
           # https://hub.nuxt.com/docs/getting-started/deploy#environments
           CLOUDFLARE_ENV: ${{ inputs.environment }}
-          # Nuxt Studio auto-detects repository branch from CI env during build.
-          # Keep Studio publishing to the editorial branch instead of `main`.
-          GITHUB_REF_NAME: content
 
       - name: Create GitHub Deployment
         if: ${{ !inputs.upload_version }}

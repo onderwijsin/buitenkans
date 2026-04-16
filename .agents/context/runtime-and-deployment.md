@@ -52,8 +52,7 @@ Configured in `nuxt.config.ts` under `nitro.cloudflare.wrangler`.
 
 ## Studio And Branching
 
-Studio repository config points to branch `content`. Deploy workflow pins `GITHUB_REF_NAME=content`
-during Nuxt build so Nuxt Studio CI auto-detection does not override branch to `main`.
+Studio repository config points to branch `content`.
 
 Automation:
 

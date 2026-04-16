@@ -32,10 +32,9 @@ Current repo-state note:
 Branch workflow for Studio-managed content:
 
 1. Editors commit to `content` branch.
-2. Deploy build forces `GITHUB_REF_NAME=content` so Nuxt Studio does not auto-detect `main` from CI.
-3. `content_promote.yml` validates that only `content/**` changed.
-4. If valid, it merges `content` into `main` using GitHub App token.
-5. `sync_main_to_content.yml` syncs `main` back into `content`.
+2. `content_promote.yml` validates that only `content/**` changed.
+3. If valid, it merges `content` into `main` using GitHub App token.
+4. `sync_main_to_content.yml` syncs `main` back into `content`.
 
 ## Deploy Flow
 
