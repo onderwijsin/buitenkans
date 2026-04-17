@@ -366,8 +366,8 @@ function insightImageWidth(index: number) {
 							<p>
 								De inzichten in deze handreiking zijn voortgekomen uit het project
 								Buitenkans, uitgevoerd in de Onderwijsregio Oost-Nederland. Deze
-								regio een coöperatie van 52 schoolbesturen in het primair onderwijs
-								en 6 hogescholen.
+								regio is een coöperatie van 52 schoolbesturen in het primair
+								onderwijs en 6 hogescholen.
 							</p>
 							<UButton
 								label="Ontdek de onderwijsregio"
