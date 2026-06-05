@@ -124,6 +124,26 @@ function insightImageWidth(index: number) {
 			? 'w-[60%]'
 			: 'w-[85%]'
 }
+
+/**
+ * Smooth scrolls to a given template ref or element id.
+ *
+ * @param target - A Vue template ref, raw HTMLElement, or element id.
+ */
+
+function scrollTo(target: string): void {
+	if (!import.meta.client || !target) {
+		return
+	}
+
+	const element: HTMLElement | null = document.getElementById(target)
+
+	element?.scrollIntoView({
+		behavior: 'smooth',
+		block: 'start',
+		inline: 'nearest'
+	})
+}
 </script>
 
 <template>
@@ -167,8 +187,9 @@ function insightImageWidth(index: number) {
 				<UButton
 					color="neutral"
 					size="xl"
-					to="docs/inzichten/overzicht"
-					trailing-icon="i-lucide-arrow-right"
+					trailing-icon="i-lucide-arrow-down"
+					class="cursor-pointer"
+					@click="scrollTo('cardSection')"
 				>
 					Ontdek de inzichten
 				</UButton>
@@ -190,7 +211,7 @@ function insightImageWidth(index: number) {
 		</LandingReveal>
 
 		<!-- SECTION -->
-		<UPageSection :ui="{ container: 'sm:pt-24 lg:py-24' }">
+		<UPageSection id="cardSection" :ui="{ container: 'sm:pt-24 lg:py-24' }">
 			<UPageGrid class="lg:grid-cols-6">
 				<!-- CARD 1 -->
 				<LandingReveal
