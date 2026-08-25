@@ -21,16 +21,16 @@ const insights: {
 	description: string
 	to?: string
 	image?: { light: string; dark: string }
-	video?: string
+	video?: { publicId: string; so: number }
 }[] = [
 	{
 		title: 'Laat iedereen gericht oriënteren',
 		description:
 			'Goede oriëntatie is cruciaal voor zij-instromers en doorstromers. Bied een gedeelde basis, met differentiatie naar achtergrond en realistisch beeld van de rol.',
 		to: '/docs/inzichten/gericht-orienteren',
-		image: {
-			light: '/graphics/gerichte_orientatie_light-mode.png',
-			dark: '/graphics/gerichte_orientatie_dark-mode.png'
+		video: {
+			publicId: 'Buitenkans_inkijkje_in_de_overstap_simetw.mp4',
+			so: 12
 		}
 	},
 	{
@@ -57,7 +57,10 @@ const insights: {
 		title: 'Organiseer meerjarige begeleiding',
 		description:
 			'Begeleiding stopt niet na de opleiding. Coaching, nazorg en community zijn essentieel voor duurzaam succes.',
-		video: 'Buitenkans_landing_en_begeleiding_yvlpmf.mp4'
+		video: {
+			publicId: 'Buitenkans_organiseer_meerjarige_begeleiding_kq7n3s.mp4',
+			so: 14
+		}
 	},
 	{
 		title: 'Faciliteer persoonlijke leerroutes',
@@ -260,8 +263,8 @@ function scrollTo(target: string): void {
 							controls
 							loop
 							playsinline
-							src="https://res.cloudinary.com/onderwijsin/video/upload/q_auto/f_auto/w_1200/Buitenkans_de_meerwaarde_van_zijinstromende_schoolleider_rnjq8j.mp4"
-							poster="https://res.cloudinary.com/onderwijsin/video/upload/so_10/q_auto/f_jpg/w_1200/Buitenkans_de_meerwaarde_van_zijinstromende_schoolleider_rnjq8j.mp4"
+							src="https://res.cloudinary.com/onderwijsin/video/upload/q_auto/f_auto/w_1200/Buitenkans_meerwaarde_zijinstromende_schoolleider_pez5xj.mp4"
+							poster="https://res.cloudinary.com/onderwijsin/video/upload/so_128/q_auto/f_jpg/w_1200/Buitenkans_meerwaarde_zijinstromende_schoolleider_pez5xj.jpg"
 						/>
 					</UPageCard>
 				</LandingReveal>
@@ -305,8 +308,8 @@ function scrollTo(target: string): void {
 							controls
 							loop
 							playsinline
-							:src="`https://res.cloudinary.com/onderwijsin/video/upload/q_auto/f_auto/w_1200/${card.video}`"
-							:poster="`https://res.cloudinary.com/onderwijsin/video/upload/so_5/q_auto/f_jpg/w_1200/${card.video}`"
+							:src="`https://res.cloudinary.com/onderwijsin/video/upload/so_${card.video.so}/q_auto/f_auto/w_1200/${card.video.publicId}`"
+							:poster="`https://res.cloudinary.com/onderwijsin/video/upload/so_${card.video.so}/q_auto/f_jpg/w_1200/${card.video.publicId}`"
 						/>
 					</UPageCard>
 				</LandingReveal>
