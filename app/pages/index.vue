@@ -27,7 +27,6 @@ const insights: {
 		title: 'Laat iedereen gericht oriënteren',
 		description:
 			'Goede oriëntatie is cruciaal voor zij-instromers en doorstromers. Bied een gedeelde basis, met differentiatie naar achtergrond en realistisch beeld van de rol.',
-		to: '/docs/inzichten/gericht-orienteren',
 		video: {
 			publicId: 'Buitenkans_inkijkje_in_de_overstap_simetw.mp4',
 			so: 12
